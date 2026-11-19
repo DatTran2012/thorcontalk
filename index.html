@@ -235,7 +235,6 @@
         <span id="hud-night-badge" class="px-2.5 py-1 rounded-xl bg-amber-500/20 border border-amber-400/40 text-amber-200 font-bold text-xs font-mono-code">Đêm 1/7</span>
         <span id="hud-mode-badge" class="px-2.5 py-1 rounded-xl bg-stone-900 border border-stone-700 text-stone-200 text-xs">👤 Đơn Khách</span>
         <button type="button" id="hud-weather-badge" class="px-2.5 py-1 rounded-xl bg-stone-900/90 hover:bg-stone-800 border border-stone-700 hover:border-amber-400/50 text-stone-200 text-xs transition-all cursor-pointer" title="Chạm để đổi 4 mùa &amp; custom quán">🍂 Thu Mưa Hẻm Nhỏ</button>
-        <span id="hud-clock-badge" class="px-2.5 py-1 rounded-xl bg-stone-900 border border-amber-500/25 text-amber-300 font-mono-code text-xs">🕰️ 00:15</span>
       </div>
 
       <div class="flex items-center gap-1.5 sm:gap-2">
@@ -2177,7 +2176,7 @@
       { id: "egg_radio", icon: "📻", name: "Chiếc Radio Cổ Trên Quầy", hint: "Chạm vào chiếc radio cổ để nghe bản tin thành phố." },
       { id: "egg_cat", icon: "🐱", name: "Chú Mèo Tam Thể Ngủ Gật", hint: "Chạm vào chú mèo tam thể nằm trên quầy gỗ." },
       { id: "egg_bunny", icon: "🐰", name: "Đôi Tai Thỏ Con", hint: "Chạm vào Chủ Quán Thỏ Con đứng sau quầy pha chế." },
-      { id: "egg_deep_night", icon: "🕰️", name: "Khoảnh Khắc 02:30 Khuya", hint: "Trò chuyện qua khung giờ sâu nhất từ 02:15 đến 03:30 sáng." }
+      { id: "egg_deep_night", icon: "🌙", name: "Khoảnh Khắc Đêm Khuya", hint: "Tiếp tục hành trình trò chuyện đến nhịp truyện giữa đêm." }
     ];
 
     const LOFI_CHANNELS = [
@@ -3424,12 +3423,10 @@
       const weatherBadge = document.getElementById("hud-weather-badge");
       if (weatherBadge) weatherBadge.textContent = season.shortLabel;
 
-      const clocks = ["00:15", "00:50", "01:30", "02:30", "03:15", "03:55", "04:30", "04:50"];
-      const clockStr = clocks[Math.min(runState.beatIndex, clocks.length - 1)] || "00:15";
-      const clockBadge = document.getElementById("hud-clock-badge");
-      if (clockBadge) clockBadge.textContent = `🕰️ ${clockStr}`;
-      if (clockStr === "02:30") {
-        discoverEasterEgg("egg_deep_night", "🕰️ Khoảnh khắc 02:30 khuya tĩnh lặng nhất đêm!");
+      // Không hiển thị đồng hồ trong HUD để tránh lệch thời gian với lời thoại.
+      // Bí mật đêm khuya vẫn được mở theo tiến trình câu chuyện (nhịp thoại thứ 4).
+      if (runState.beatIndex === 3) {
+        discoverEasterEgg("egg_deep_night", "🌙 Khoảnh khắc đêm khuya tĩnh lặng nhất!");
       }
 
       document.getElementById("hud-trust-val").textContent = runState.trust;
