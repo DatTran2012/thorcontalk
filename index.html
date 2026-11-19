@@ -269,7 +269,6 @@
       <canvas id="cafe-canvas" class="w-full h-full block cursor-pointer"></canvas>
       <div class="absolute bottom-2 left-2.5 right-2.5 flex items-center justify-between pointer-events-none text-[10px] sm:text-xs text-stone-300/85">
         <span id="stage-guest-label" class="px-2.5 py-0.5 rounded-full bg-black/65 border border-white/10">🐰 Quầy Nước Thỏ Con</span>
-        <span class="hidden sm:inline px-2.5 py-0.5 rounded-full bg-black/65 border border-white/10">💡 Chạm vào Khách, Thỏ Con, Mèo Tam Thể, Radio hoặc Cửa Sổ</span>
       </div>
     </div>
 
@@ -345,10 +344,13 @@
           <span>📮 Bưu Thiếp</span><span id="mobile-postcard-badge" class="font-mono-code text-[11px] text-amber-300">0/7</span>
         </button>
         <button type="button" data-drawer-action="achievements" class="min-h-[44px] px-3 py-2 rounded-xl bg-stone-900/90 hover:bg-stone-800 border border-stone-700 text-xs text-stone-200 flex items-center justify-between cursor-pointer">
-          <span>🏆 Danh Hiệu</span><span id="mobile-ach-badge" class="font-mono-code text-[11px] text-amber-300">0/16</span>
+          <span>🏆 Danh Hiệu</span><span id="mobile-ach-badge" class="font-mono-code text-[11px] text-amber-300">0/18</span>
         </button>
         <button type="button" data-drawer-action="easter-eggs" class="min-h-[44px] px-3 py-2 rounded-xl bg-stone-900/90 hover:bg-stone-800 border border-stone-700 text-xs text-stone-200 flex items-center justify-between cursor-pointer">
-          <span>🔮 5 Bí Mật</span><span id="mobile-easter-badge" class="font-mono-code text-[11px] text-amber-300">0/5</span>
+          <span>🔮 Bí Mật Quán</span><span id="mobile-easter-badge" class="font-mono-code text-[11px] text-amber-300">?</span>
+        </button>
+        <button type="button" id="btn-drawer-secrets" data-drawer-action="secrets" class="hidden min-h-[44px] px-3 py-2 rounded-xl bg-fuchsia-500/15 hover:bg-fuchsia-500/25 border border-fuchsia-400/35 text-xs text-fuchsia-200 flex items-center justify-between cursor-pointer">
+          <span>🗝️ Kho Bí Mật</span><span id="mobile-secrets-badge" class="font-mono-code text-[11px]">0</span>
         </button>
         <button type="button" id="btn-night8-secret" class="min-h-[44px] px-3 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/45 text-xs text-amber-200 font-semibold flex items-center justify-between cursor-pointer">
           <span>🌅 Đêm Hội Ngộ</span><span id="mobile-night8-badge" class="font-mono-code text-[11px]">🔒</span>
@@ -474,8 +476,8 @@
     <div class="max-w-3xl w-full cafe-panel rounded-3xl p-4 sm:p-6 max-h-[90dvh] flex flex-col">
       <div class="flex items-center justify-between pb-3 border-b border-stone-800">
         <div>
-          <h3 class="font-serif-story text-lg font-bold text-amber-200">🍹 Album Ly &amp; Thực Đơn Độc Quyền (<span id="signature-menu-count">0/6</span>)</h3>
-          <p class="text-[11px] text-stone-400">Phối đúng công thức bí mật để mở khóa tên riêng của 6 món đặc sản quán</p>
+          <h3 class="font-serif-story text-lg font-bold text-amber-200">🍹 Album Ly &amp; Thực Đơn Độc Quyền (<span id="signature-menu-count">0</span>)</h3>
+          <p class="text-[11px] text-stone-400">Những công thức bí truyền chỉ lộ tên khi bạn tình cờ phối đúng</p>
         </div>
         <button type="button" data-close-modal="modal-album" class="w-9 h-9 rounded-xl bg-stone-900 hover:bg-stone-800 text-stone-300 flex items-center justify-center cursor-pointer">✕</button>
       </div>
@@ -620,12 +622,27 @@
     <div class="max-w-xl w-full cafe-panel rounded-3xl p-4 sm:p-6 max-h-[90dvh] flex flex-col">
       <div class="flex items-center justify-between pb-3 border-b border-stone-800">
         <div>
-          <h3 class="font-serif-story text-lg font-bold text-amber-200">🔮 5 Bí Mật Ẩn Trong Quán</h3>
-          <p class="text-[11px] text-stone-400">Khám phá các tương tác ẩn trên sân khấu quán để ghép thông điệp bí mật</p>
+          <h3 class="font-serif-story text-lg font-bold text-amber-200">🔮 Những Bí Mật Ẩn Trong Quán</h3>
+          <p class="text-[11px] text-stone-400">Có những điều nhỏ bé chỉ hiện ra khi bạn tình cờ tìm thấy</p>
         </div>
         <button type="button" data-close-modal="modal-easter-eggs" class="w-9 h-9 rounded-xl bg-stone-900 hover:bg-stone-800 text-stone-300 flex items-center justify-center cursor-pointer">✕</button>
       </div>
+      <div id="egg-message-box" class="mt-3 p-3 rounded-2xl bg-amber-500/10 border border-amber-400/30 text-xs"></div>
       <div id="easter-eggs-grid" class="overflow-y-auto py-3.5 space-y-2.5 pr-1"></div>
+    </div>
+  </div>
+
+  <!-- Secret Vault Modal -->
+  <div id="modal-secrets" data-modal-overlay="true" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-2.5 sm:p-4">
+    <div class="max-w-2xl w-full cafe-panel rounded-3xl p-4 sm:p-6 max-h-[90dvh] flex flex-col">
+      <div class="flex items-center justify-between pb-3 border-b border-stone-800">
+        <div>
+          <h3 class="font-serif-story text-lg font-bold text-fuchsia-200">🗝️ Kho Bí Mật Của Thỏ Con (<span id="secrets-count">0</span>)</h3>
+          <p class="text-[11px] text-stone-400">Những điều bất ngờ bạn đã tình cờ tìm thấy trong quán</p>
+        </div>
+        <button type="button" data-close-modal="modal-secrets" class="w-9 h-9 rounded-xl bg-stone-900 hover:bg-stone-800 text-stone-300 flex items-center justify-center cursor-pointer">✕</button>
+      </div>
+      <div id="secrets-grid" class="overflow-y-auto py-3.5 space-y-2.5 pr-1"></div>
     </div>
   </div>
 
@@ -719,6 +736,14 @@
         [copy[i], copy[j]] = [copy[j], copy[i]];
       }
       return copy;
+    }
+
+    function escapeHtml(str) {
+      return String(str == null ? "" : str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
     }
 
     function showToast(message) {
@@ -1046,7 +1071,7 @@
         rHeart: "Vy khẽ siết chặt chiếc máy ghi âm: 'Là khoảnh khắc người đối diện nhận ra có người thực sự muốn nghe câu chuyện của họ, chứ không phải để câu lượt xem...'",
         qMind: "Nếu bài viết tổng hợp đã phổ biến, đâu là góc nhìn thực địa mà chỉ một phóng viên trẻ có mặt tại hiện trường mới khai thác được?",
         rMind: "Đôi mắt Vy sáng lên: 'Đó là những chi tiết đời thường và cảm xúc thật phía sau các con số khô khan! Em có thể xây dựng chuyên mục phóng sự nhân vật độc lập!'",
-        clue: "Em cần một ly gì đó mát lạnh nhưng đánh thức sự tỉnh táo, có chút hương cam chanh hoặc bạc hà để đầu óc sáng rõ trở lại...",
+        clue: "Em cần một ly thật mát lạnh, vị thanh và tỉnh người, thoảng chút chua dịu của quả và hơi the mát nơi đầu lưỡi để đầu óc sáng rõ trở lại...",
         reflection: "Vy nhấp một ngụm dài, đôi vai căng cứng bỗng thả lỏng: 'Vị thanh mát này làm em nhớ lại cảm giác hào hứng ngày đầu tiên bước chân vào cổng trường báo chí.'",
         advHeart: "Đừng để một bộ lọc tự động định nghĩa giá trị trái tim nhiệt huyết của em. Những câu chuyện tử tế luôn tìm được độc giả của riêng mình.",
         rAdvHeart: "Vy mỉm cười rạng rỡ, đôi mắt long lanh: 'Em hiểu rồi! Em sẽ tiếp tục đi và viết bằng tất cả sự chân thành của mình!'",
@@ -1063,7 +1088,7 @@
         rHeart: "Minh tháo kính xuống, giọng trầm hẳn: 'Có lẽ là lúc tôi ghé mua ổ bánh mì nóng của bác bán hàng đầu ngõ và nghe bác hỏi thăm hôm nay có mệt không...'",
         qMind: "Công nghệ vốn là công cụ trung tính — anh có thể thiết kế lại hệ thống theo hướng hỗ trợ con người thay vì thay thế họ không?",
         rMind: "Minh khẽ gõ tay lên bàn: 'Thực ra có! Nếu chuyển từ tự động hóa cắt giảm sang công cụ trợ giúp nâng cao năng suất và an toàn cho nhân viên, mọi thứ sẽ khác hẳn!'",
-        clue: "Cho tôi một ly cà phê thật đậm để tỉnh táo, nhưng có thêm chút gì đó dịu dàng để làm mềm đi sự căng thẳng trong đầu...",
+        clue: "Cho tôi một ly thật đậm, đắng gọn để tỉnh táo, nhưng hậu vị phải có chút mặn dịu hoặc ấm cay nhẹ để làm mềm đi sự căng thẳng trong đầu...",
         reflection: "Minh thở phào một hơi dài sau ngụm cà phê đầu tiên: 'Lâu lắm rồi tôi mới thưởng thức một ly nước mà không vừa uống vừa kiểm tra email.'",
         advHeart: "Đừng tự trách mình vì sự phát triển của thời đại. Chỉ cần anh còn trăn trở vì người khác, trái tim anh vẫn luôn là người dẫn đường.",
         rAdvHeart: "Minh mỉm cười nhẹ nhõm: 'Cảm ơn Thỏ Con. Tôi nhận ra mình không cần phải gồng mình trở nên lạnh lùng để làm một kỹ sư giỏi.'",
@@ -1080,7 +1105,7 @@
         rHeart: "Chị Linh mở cuốn sổ đỏ ra, ánh mắt dịu lại: 'Chị muốn viết về những người bình thường vẫn âm thầm tử tế với nhau giữa những ngày khó khăn nhất.'",
         qMind: "Giữa biển nội dung công nghiệp giống hệt nhau, điều gì khiến độc giả sẵn sàng dừng lại và trân trọng một tác phẩm viết tay?",
         rMind: "Chị Linh mỉm cười: 'Là trải nghiệm sống thật và giọng văn có linh hồn — thứ mà không thuật toán thống kê nào có thể tự trải qua!'",
-        clue: "Chị muốn một thức uống có hương hoa dịu dàng, ngọt thanh và gợi chút hoài niệm của những buổi chiều đọc sách...",
+        clue: "Chị muốn một thức uống chua ngọt dịu nhẹ, thơm như hương hoa và gợi chút hoài niệm của những buổi chiều đọc sách...",
         reflection: "Chị Linh nhấp một ngụm nhỏ, hương hoa lan tỏa: 'Vị ngọt dịu này giống hệt cảm giác khi đọc xong một trang văn hay.'",
         advHeart: "Những câu chữ được viết ra từ trái tim có sức sống bền bỉ hơn mọi cơn sốt nhất thời. Xin chị đừng cất cuốn sổ đỏ ấy vào ngăn kéo.",
         rAdvHeart: "Chị Linh khẽ lau khóe mắt, nụ cười rạng rỡ: 'Chị sẽ tiếp tục viết cuốn bản thảo của mình, dù mỗi đêm chỉ thêm được một trang!'",
@@ -1097,7 +1122,7 @@
         rHeart: "Anh Tuấn mỉm cười hiền hậu, lấy ví cho bạn xem tấm ảnh nhỏ: 'Là lúc hai đứa nhét tờ giấy vẽ hình siêu nhân vào túi áo khoác của bố...'",
         qMind: "Với tay nghề cơ khí 12 năm của anh, liệu có hướng chuyển dịch nào sang bảo trì phương tiện xanh đang thiếu thợ lành nghề không?",
         rMind: "Anh Tuấn mắt sáng lên: 'Có chứ! Mấy trạm bảo trì xe điện mới mở đang tìm thợ có kinh nghiệm cơ khí thực tế, tại anh cứ mải chạy xe nên chưa kịp nộp hồ sơ!'",
-        clue: "Pha cho anh ly gì thật ấm bụng, có chút vị gừng hoặc mật ong cho tan hết hơi lạnh ngoài đường nhé...",
+        clue: "Pha cho anh ly gì thật ấm bụng, đậm đà, có chút cay nồng và ngọt hậu cho tan hết hơi lạnh ngoài đường nhé...",
         reflection: "Anh Tuấn xoa hai bàn tay vào ly nước ấm rồi uống một ngụm lớn: 'Ấm từ cổ họng xuống tới tận lòng bàn tay luôn em ạ!'",
         advHeart: "Sự hy sinh thầm lặng của anh chính là mái nhà vững chãi nhất cho hai con. Anh đã làm một người cha tuyệt vời rồi.",
         rAdvHeart: "Anh Tuấn xúc động gật đầu: 'Nghe em nói mà anh thấy bao nhiêu mệt nhọc suốt cả tuần tan biến hết!'",
@@ -1114,7 +1139,7 @@
         rHeart: "Anh Khang nhìn đôi bàn tay chai sần của mình: 'Là dấu ấn của người thợ. Mỗi chiếc ví dùng mười năm vẫn bền đẹp, mang theo hơi ấm của người làm ra nó.'",
         qMind: "Nếu không thể cạnh tranh về giá với hàng công nghiệp, anh có thể biến chính quy trình chế tác thủ công thành trải nghiệm độc bản cho khách hàng không?",
         rMind: "Anh Khang gật gù suy ngẫm: 'Ý hay đấy! Khách hàng giờ rất thích được tự tay khắc tên và chứng kiến người thợ hoàn thiện món đồ dành riêng cho mình!'",
-        clue: "Cho anh một ly rượu mạch nha hoặc cà phê đậm ấm áp, thêm chút hương gia vị trầm ấm như gỗ và sáp ong...",
+        clue: "Cho anh một ly đậm, ấm và trầm, hậu vị có chút cay ấm của gia vị và thoang thoảng mùi gỗ, mùi sáp ong...",
         reflection: "Anh Khang nhấp một ngụm, gật đầu tán thưởng: 'Hương vị đậm đà và chân thật hệt như một tấm da thuộc mộc nguyên bản vậy.'",
         advHeart: "Giá trị của sự tử tế và lòng tự trọng nghề nghiệp không bao giờ lỗi thời. Anh em thợ trong xưởng thật may mắn khi có một người anh như anh.",
         rAdvHeart: "Anh Khang mỉm cười vững tin: 'Cảm ơn Thỏ Con. Anh sẽ giữ vững ngọn lửa của xưởng bằng tất cả tâm huyết!'",
@@ -1131,7 +1156,7 @@
         rHeart: "Cô Hoa rưng rưng mỉm cười: 'Cô chỉ muốn hỏi hôm nay con ăn có ngon miệng không, và nhắc con rằng lúc nào mệt mỏi thì mẹ vẫn luôn ở đây.'",
         qMind: "Tại sao cô không thử nhờ chính cậu con trai làm 'thầy giáo' hướng dẫn cô làm chủ các công cụ công nghệ mới trong công việc?",
         rMind: "Cô Hoa khẽ reo lên: 'Ôi đúng rồi! Bọn trẻ rất thích được hướng dẫn người lớn — đó vừa là cách cô học cái mới, vừa là cầu nối để hai mẹ con trò chuyện!'",
-        clue: "Pha cho cô một tách trà ấm dịu nhẹ, có chút mật ong hoặc hoa cúc để lòng thư thái dễ ngủ nhé cháu...",
+        clue: "Pha cho cô một tách nước ấm, dịu nhẹ, ngọt thanh và thoang thoảng hương hoa để lòng thư thái dễ ngủ nhé cháu...",
         reflection: "Cô Hoa nâng tách trà ấm bằng hai tay, nhấp một ngụm nhỏ: 'Ngọt thanh và dịu dàng quá, bao nhiêu lo âu trong lòng cô như lắng xuống hết.'",
         advHeart: "Tình yêu thương của một người mẹ là điều ấm áp nhất mà không công nghệ nào thay thế được. Con trai cô chắc chắn luôn cảm nhận được điều đó.",
         rAdvHeart: "Cô Hoa mỉm cười rạng rỡ: 'Cảm ơn cháu nhiều lắm. Sáng mai cô sẽ nấu món con thích nhất và trò chuyện cùng con!'",
@@ -1148,7 +1173,7 @@
         rHeart: "Bác An vuốt nhẹ chòm râu bạc, ánh mắt sáng ngời: 'Có một cậu học trò cá biệt năm xưa đã tìm thấy lẽ sống từ một câu thơ, giờ cậu ấy đã trở thành một bác sĩ tận tụy.'",
         qMind: "Nếu hiệu sách cũ đóng cửa, bác có nghĩ tới việc lập một tủ sách cộng đồng và câu lạc bộ đọc chậm ngay tại khu phố này không?",
         rMind: "Bác An mỉm cười gật gù: 'Ý tưởng tuyệt vời! Những người yêu sách giấy vẫn luôn ở đó, chỉ cần một góc nhỏ ấm áp như quán của cháu để hội tụ!'",
-        clue: "Cho bác một ly gì đó mang hương vị hoài niệm, có chút mơ ủ hoặc hương hoa nhài thanh tao nhé...",
+        clue: "Cho bác một ly mang hương vị hoài niệm, chua ngọt thanh tao, thoảng hương hoa nhẹ như một chiều thu xưa nhé...",
         reflection: "Bác An nhấp một ngụm nhỏ, khẽ gật đầu: 'Hương vị tinh tế này gợi nhớ những buổi chiều thu ngồi đàm đạo văn chương bên hiên nhà cổ.'",
         advHeart: "Những hạt giống tâm hồn bác đã gieo suốt bốn mươi năm vẫn đang nở hoa trong lòng bao thế hệ học trò.",
         rAdvHeart: "Bác An xúc động mỉm cười: 'Cảm ơn cháu. Nghe cháu nói, bác thấy đời dạy học của mình thật trọn vẹn!'",
@@ -1758,7 +1783,7 @@
               reply: "Trong sự tĩnh lặng dịu dàng của quán, bác An khẽ lật mở trang sách cũ chỉ cho Vy xem những dòng ghi chú viết tay, mở đầu một cuộc trò chuyện say sưa."
             }
           ],
-          clue: "Vy mong một vị thanh mát đánh thức sự sáng tạo, còn bác An thích hương mơ hoặc hoa nhài gợi nhớ những chiều thu xưa.",
+          clue: "Vy mong một vị thanh mát, tỉnh người để đánh thức sự sáng tạo, còn bác An thích vị chua ngọt thanh tao, thoảng hương hoa gợi nhớ những chiều thu xưa.",
           synergyReflection: "Cả hai cùng nâng ly giữa tiếng mưa rơi ngoài hiên — vị thanh trẻ trung hòa quyện cùng hương thơm hoài niệm như nhịp cầu nối liền hai thế hệ.",
           finalPrompt: "Trước khi trời rạng sáng, bác An và Vy đang bàn về dự án chung đầu tiên. Bạn muốn cổ vũ họ theo hướng nào?",
           finalChoices: [
@@ -1812,7 +1837,7 @@
               reply: "Không khí căng thẳng tan biến nhanh chóng; cô Hoa hỏi thăm Minh đã ăn tối chưa, khiến chàng kỹ sư bỗng thấy sống mũi cay cay."
             }
           ],
-          clue: "Minh cần vị cà phê tỉnh táo nhưng dịu nhẹ, còn cô Hoa mong tách trà ấm áp xoa dịu nỗi lo âu.",
+          clue: "Minh cần vị đậm, tỉnh táo nhưng hậu dịu nhẹ, còn cô Hoa mong một thức uống ấm áp, ngọt thanh để xoa dịu nỗi lo âu.",
           synergyReflection: "Hương cà phê quyện cùng mùi trà hoa cúc mật ong lan tỏa, biến góc quầy nửa đêm thành một căn bếp gia đình ấm cúng.",
           finalPrompt: "Trước lúc chia tay ra về, hai cô cháu đã tìm thấy sự đồng cảm sâu sắc. Bạn gửi gắm lời chúc nào cho họ?",
           finalChoices: [
@@ -1866,7 +1891,7 @@
               reply: "Nhìn hai món đồ thủ công nằm cạnh nhau, cả hai tự nhiên mỉm cười và bắt đầu trao đổi say sưa về cái đẹp của sự chậm rãi."
             }
           ],
-          clue: "Chị Linh thích hương hoa hoài niệm dịu dàng, còn anh Khang hợp với vị rượu mạch nha hoặc cà phê ấm áp trầm lắng.",
+          clue: "Chị Linh thích vị chua ngọt dịu dàng thơm hương hoa gợi hoài niệm, còn anh Khang hợp với vị đậm, ấm và trầm lắng.",
           synergyReflection: "Hương sáp ong, mùi mực bút máy và vị nước ấm hòa quyện tạo nên một không gian nghệ thuật tĩnh tại hiếm có.",
           finalPrompt: "Hai tâm hồn đồng điệu đã tìm thấy tri kỷ nghề nghiệp. Bạn muốn gửi lời chúc nào cho sự hợp tác này?",
           finalChoices: [
@@ -1920,7 +1945,7 @@
               reply: "Không có sự trách móc nào xảy ra — trái lại, anh Tuấn và Minh bắt đầu trò chuyện cởi mở như hai người anh em cùng thức khuya."
             }
           ],
-          clue: "Anh Tuấn cần thức uống ấm bụng vị gừng mật ong, còn Minh hợp với cà phê đậm đà tỉnh táo.",
+          clue: "Anh Tuấn cần thức uống ấm bụng, cay nồng và ngọt hậu, còn Minh hợp với vị đậm đà, tỉnh táo.",
           synergyReflection: "Bên quầy gỗ ấm, khoảng cách giữa thế giới thuật toán và thực tế đường phố được xóa nhòa sau từng ngụm nước.",
           finalPrompt: "Cuộc đối thoại thẳng thắn đã mở ra góc nhìn mới cho cả hai. Bạn muốn chốt lại đêm nay thế nào?",
           finalChoices: [
@@ -1974,7 +1999,7 @@
               reply: "Hai người phụ huynh vừa thưởng thức bánh ấm vừa trò chuyện rôm rả như những người bạn hàng xóm thân thiết."
             }
           ],
-          clue: "Cả anh Tuấn và cô Hoa đều cần sự ấm áp dịu dàng từ gừng tươi, mật ong và trà thảo mộc.",
+          clue: "Cả anh Tuấn và cô Hoa đều cần một thức uống thật ấm, ngọt hậu và dịu dàng như vòng tay người thân.",
           synergyReflection: "Hơi ấm từ hai ly nước lan tỏa, vỗ về những đôi vai đã gồng gánh suốt cả tuần dài.",
           finalPrompt: "Trước khi chia tay trở về với tổ ấm của mình, bạn muốn gửi lời chúc nào tới hai người?",
           finalChoices: [
@@ -2028,7 +2053,7 @@
               reply: "Hai tâm hồn yêu sách say sưa trao đổi về những tác phẩm kinh điển suốt cả giờ đồng hồ mà quên cả thời gian."
             }
           ],
-          clue: "Cả chị Linh và bác An đều yêu thích hương vị hoài niệm thanh tao của rượu mơ ủ và hoa nhài.",
+          clue: "Cả chị Linh và bác An đều yêu thích vị chua ngọt hoài niệm, thanh tao và thơm hương hoa dịu nhẹ.",
           synergyReflection: "Vị ngọt thanh của mơ ủ và hương hoa nhài nâng niu từng câu chuyện văn chương đẹp như một bài thơ đêm.",
           finalPrompt: "Trời sắp hửng sáng sau một đêm đàm đạo tri kỷ. Bạn muốn chúc hai người điều gì?",
           finalChoices: [
@@ -2129,6 +2154,72 @@
     const ALL_DUO_KEYS = Object.keys(DUO_PAIRINGS);
     const STANDARD_GUEST_ORDER = ["vy", "minh", "linh", "tuan", "khang", "hoa", "an"];
 
+    /* ---- KHO BÍ MẬT: phần thưởng khi hoàn thành các mốc sưu tầm ---- */
+    const SECRET_VAULT = [
+      {
+        id: "secret_message", icon: "💌🌙", title: "Thông Điệp Dưới Đáy Ly",
+        hint: "Khám phá cả 5 bí mật ẩn trên sân khấu quán để ghép trọn thông điệp.",
+        reward: "🌙 Mở khóa «Đèn Trăng Khuyết» trong Custom Không Gian Quán",
+        story: "Khi năm mảnh bí mật ghép lại, đáy chiếc ly cũ trên kệ hiện lên một dòng chữ khắc tay: “Giữ ngọn đèn này sáng không phải vì có ai đến — mà vì ai cũng có thể đến.” Đó là câu người chủ quán già từng nói với Thỏ Con trong đêm mưa năm xưa."
+      },
+      {
+        id: "secret_card_17", icon: "🃏✨", title: "Lá Bài Thứ 17: Người Gác Đêm",
+        hint: "Rút đủ cả 16 lá bài DRINK trên quầy gỗ.",
+        reward: "🎴 Mở khóa góc trang trí «Chồng Bài DRINK Phát Sáng»",
+        story: "Dưới đáy hộp bài DRINK còn một lá trắng chưa từng ai rút. Mặt trước viết bằng bút mực vàng: “Nếu đêm nay là đêm cuối cùng quán mở cửa, bạn muốn nói gì với người đang ngồi đối diện?” Thỏ Con lật lá bài, mỉm cười đáp: “Cảm ơn bạn đã ghé — vì nhờ có bạn, ngọn đèn này mới có lý do để sáng.”"
+      },
+      {
+        id: "secret_signature", icon: "🍵🤍", title: "Ly Thứ Bảy Không Tên",
+        hint: "Mở khóa đủ 6 món độc quyền của quán.",
+        reward: "🪵 Mở khóa «Quầy Gỗ Viền Vàng» trong Custom Không Gian Quán",
+        story: "Sau khi thuộc lòng sáu công thức, Thỏ Con tìm thấy trong ngăn kéo quầy một mảnh giấy ố vàng của người chủ quán già: “Ly thứ bảy: một chén trà hoa cúc mật ong, thêm một lát gừng mỏng, và một lần lắng nghe thật lòng.” Bên dưới ghi thêm: “Món này không có tên — tên của nó là tên của người đang uống.”"
+      },
+      {
+        id: "secret_keepsakes", icon: "🏺💡", title: "Kệ Kỷ Vật Sáng Đèn",
+        hint: "Sưu tầm đủ 7 kỷ vật từ 7 vị khách.",
+        reward: "🏺 Mở khóa góc trang trí «Kệ Bảy Kỷ Vật» trên quầy",
+        story: "Cuộn băng phỏng vấn, chú vịt cao su, cuốn sổ bìa đỏ, chiếc cờ lê bạc, thẻ da sáp ong, khăn len hổ phách và cây bút ngòi vàng — bảy món đồ nhỏ xếp cạnh nhau bỗng tỏa ra một quầng sáng ấm. Thỏ Con chợt hiểu: quán này không chỉ pha nước, mà còn giữ hộ mọi người những mảnh ký ức đẹp nhất."
+      },
+      {
+        id: "secret_endings", icon: "📖🕯️", title: "Trang Cuối Sổ Tay Thỏ Con",
+        hint: "Mở khóa toàn bộ 33 kết cục câu chuyện.",
+        reward: "🎼 Mở khóa kênh nhạc «Khúc Ca Của Người Gác Đêm»",
+        story: "Ba mươi ba ngã rẽ đã khép lại. Ở trang cuối cuốn sổ tay, Thỏ Con viết: “Gửi những người đã ngồi trước quầy gỗ này — tôi không cứu ai cả. Tôi chỉ giữ cho đèn sáng, còn các bạn tự tìm thấy đường về. Cảm ơn vì đã cho một người lạc hướng năm nào có lý do để ở lại.”"
+      },
+      {
+        id: "secret_cat", icon: "🐱🔔", title: "Tên Thật Của Mèo Tam Thể",
+        hint: "Vuốt ve chú mèo tam thể thật nhiều lần (đủ 20 lần).",
+        reward: "🔔 Chú mèo được đeo chiếc chuông vàng nhỏ trên sân khấu quán",
+        story: "Sau lần vuốt thứ hai mươi, chú mèo tam thể ngẩng đầu, kêu một tiếng thật khẽ. Thỏ Con chợt nhớ ra: người chủ quán già từng gọi nó là “Bánh Quy” — vì nó luôn nằm cạnh đĩa bánh quy gừng. Từ giờ, chú mèo có tên, và có cả một chiếc chuông vàng để báo hiệu mỗi khi khách đến."
+      },
+      {
+        id: "secret_clock", icon: "🕰️🌌", title: "Giờ Thứ Hai Mươi Lăm",
+        hint: "Chiếc đồng hồ treo tường dường như đang đợi ai đó chạm vào nó… thật nhiều lần.",
+        reward: "🕰️ Đồng hồ viền vàng, kim chạy theo giờ thật của bạn",
+        hiddenProgress: true,
+        story: "Lần chạm thứ bảy, kim đồng hồ khẽ rung rồi dừng lại giữa hai con số. Có một giờ không nằm trên mặt đồng hồ — giờ của những người thức khuya mà không ai kể, nơi mọi mệt mỏi được phép nghỉ ngơi. Thỏ Con thì thầm: “Chào mừng đến giờ thứ hai mươi lăm.”"
+      },
+      {
+        id: "secret_seasons", icon: "🌸🍂❄️", title: "Mùa Thứ Năm: Hừng Đông",
+        hint: "Ngắm đủ cả 4 mùa Xuân – Hạ – Thu – Đông qua ô cửa sổ quán.",
+        reward: "🌅 Ô cửa sổ có thêm vệt nắng Hừng Đông ở chân trời",
+        story: "Xuân có hoa đào, hạ có đom đóm, thu có mưa rả rích, đông có tuyết rơi. Nhưng mùa thứ năm không nằm trong lịch: đó là khoảnh khắc ngay trước bình minh, khi mọi cơn mưa tạnh. Một vệt nắng vàng nhạt chạm vào bậu cửa — mùa của những người vừa vượt qua đêm dài."
+      },
+      {
+        id: "secret_perfect", icon: "🤲🌟", title: "Bàn Tay Vàng Của Thỏ Con",
+        hint: "Pha chế đạt chuẩn Hoàn Hảo 10 ly nước.",
+        reward: "🥂 Ly nước trên quầy có viền vàng lấp lánh",
+        story: "Mười ly hoàn hảo — nhưng khách nhớ mãi không phải vị nước, mà là cảm giác được pha riêng cho mình. Bí quyết của người chủ quán già hóa ra đơn giản: “Pha bằng đôi tay, nhưng rót bằng cả tấm lòng.” Chiếc ly trên quầy bắt đầu ánh lên một viền vàng nhỏ."
+      },
+      {
+        id: "secret_master", icon: "🚪🌅", title: "Cánh Cửa Thứ Hai",
+        hint: "Chỉ người nào lật mở mọi bí mật còn lại và hội ngộ đủ 7 vị khách mới thấy.",
+        reward: "👑 Ngôi sao vàng lấp lánh trên đầu Thỏ Con",
+        hiddenProgress: true,
+        story: "Khi mọi bí mật đã được kể, phía sau quầy gỗ hiện ra một cánh cửa nhỏ chưa từng có. Thỏ Con đẩy nhẹ: bên kia là con hẻm sáng nắng, và ở đầu hẻm, người chủ quán già đang đứng mỉm cười, gật đầu như muốn nói: “Cháu đã giữ đèn thay ta rất tốt.” Ngọn đèn vàng của Tiệm Nước Nửa Đêm sẽ sáng mãi."
+      }
+    ];
+
     const CUTSCENE_CATALOG = [
       { id: "origin_thocon_1", icon: "🌧️🐰", location: "KHỞI NGUỒN • ĐÊM MƯA BA NĂM TRƯỚC", title: "Người Lạc Hướng Giữa Thành Phố Đêm", caption: "Ba năm trước, giữa một đêm mưa tầm tã của mùa suy thoái, Thỏ Con từng lang thang qua những con phố tắt đèn với đôi vai trĩu nặng nỗi hoang mang về tương lai." },
       { id: "origin_thocon_2", icon: "🏮🍵", location: "KHỞI NGUỒN • ÁNH ĐÈN HIÊN NHỎ", title: "Tách Trà Ấm Không Hỏi Tên", caption: "Một người chủ quán già nơi cuối hẻm đã mở cửa lúc 2 giờ sáng, rót mời Thỏ Con một chén trà hoa cúc mật ong ấm nóng và chỉ lặng lẽ lắng nghe mà không hề phán xét." },
@@ -2196,7 +2287,15 @@
         location: "05:00 • BÌNH MINH HỘI NGỘ",
         title: "Ánh Nắng Đầu Ngày Trên Tiệm Nước Nhỏ",
         caption: "Cơn mưa đêm tạnh hẳn. Những tia nắng sớm đầu tiên chiếu rọi qua khung cửa sổ tiệm nước Thỏ Con — nơi mọi câu chuyện đều tìm thấy bình yên."
-      }
+      },
+
+      ...SECRET_VAULT.map((s) => ({
+        id: s.id,
+        icon: s.icon,
+        location: "🗝️ KHO BÍ MẬT • BÍ MẬT ĐÃ MỞ",
+        title: s.title,
+        caption: s.story
+      }))
     ];
 
     const ACHIEVEMENTS = [
@@ -2215,7 +2314,9 @@
       { id: "ach_pet_cat", title: "Người Bạn Của Mèo Tam Thể", desc: "Vuốt ve chú mèo tam thể trên quầy 5 lần.", titleReward: "Quản Gia Mèo Tam Thể" },
       { id: "ach_night_8", title: "Bình Minh Hội Ngộ", desc: "Hoàn thành Đêm Hội Ngộ Bí Mật cùng tất cả vị khách.", titleReward: "Trái Tim Tiệm Nước" },
       { id: "ach_peace_all", title: "Năm Dấu Ấn Bình Yên", desc: "Khám phá trọn vẹn 5 bí mật ẩn trên sân khấu quán.", titleReward: "Người Giữ Sự Bình Yên" },
-      { id: "ach_perfect_brew", title: "Bàn Tay Vàng Quầy Gỗ", desc: "Pha chế đạt chuẩn Hoàn Hảo 3 ly nước qua thử thách quầy bar.", titleReward: "Nghệ Nhân Tinh Hoa" }
+      { id: "ach_perfect_brew", title: "Bàn Tay Vàng Quầy Gỗ", desc: "Pha chế đạt chuẩn Hoàn Hảo 3 ly nước qua thử thách quầy bar.", titleReward: "Nghệ Nhân Tinh Hoa" },
+      { id: "ach_secret_5", title: "Người Giữ Bí Mật", desc: "Mở khóa 5 bí mật trong Kho Bí Mật.", titleReward: "Người Giữ Bí Mật Quán" },
+      { id: "ach_secret_all", title: "Chìa Khóa Vạn Năng", desc: "Mở khóa toàn bộ bí mật trong Kho Bí Mật.", titleReward: "Người Gác Đêm Vĩnh Cửu" }
     ];
 
     const EASTER_EGGS = [
@@ -2226,10 +2327,19 @@
       { id: "egg_deep_night", icon: "🌙", name: "Khoảnh Khắc Đêm Khuya", hint: "Tiếp tục hành trình trò chuyện đến nhịp truyện giữa đêm." }
     ];
 
+    const EGG_FRAGMENTS = {
+      egg_window: "Giữ ngọn đèn",
+      egg_radio: "này sáng",
+      egg_cat: "không phải vì có ai đến —",
+      egg_bunny: "mà vì",
+      egg_deep_night: "ai cũng có thể đến."
+    };
+
     const LOFI_CHANNELS = [
       { id: "seasonal_auto", name: "🌿 Hòa Âm Theo Mùa", notes: [261.63, 329.63, 392.0, 493.88] },
       { id: "old_piano", name: "🎹 Piano Cũ Ấm Áp", notes: [220.0, 261.63, 329.63, 392.0] },
-      { id: "quiet_dawn", name: "🌅 Đêm Tĩnh Lặng", notes: [293.66, 349.23, 440.0, 523.25] }
+      { id: "quiet_dawn", name: "🌅 Đêm Tĩnh Lặng", notes: [293.66, 349.23, 440.0, 523.25] },
+      { id: "night_keeper", name: "🕯️ Khúc Ca Người Gác Đêm", notes: [196.0, 246.94, 293.66, 392.0], requires: "secret_endings" }
     ];
 
     const SEASON_THEMES = [
@@ -2297,7 +2407,8 @@
         choices: [
           { id: "lantern_classic", name: "🏮 Đèn Lồng Giấy" },
           { id: "lantern_star", name: "✨ Dây Đèn Sao" },
-          { id: "lantern_vintage", name: "🕯️ Đèn Đồng Cổ" }
+          { id: "lantern_vintage", name: "🕯️ Đèn Đồng Cổ" },
+          { id: "lantern_moon", name: "🌙 Đèn Trăng Khuyết", requires: "secret_message" }
         ]
       },
       counter: {
@@ -2305,7 +2416,8 @@
         choices: [
           { id: "wood_oak", name: "🪵 Gỗ Thông Mật" },
           { id: "wood_walnut", name: "🌰 Gỗ Óc Chó" },
-          { id: "wood_linen", name: "🧵 Khăn Thổ Cẩm" }
+          { id: "wood_linen", name: "🧵 Khăn Thổ Cẩm" },
+          { id: "wood_gold", name: "✨ Viền Vàng", requires: "secret_signature" }
         ]
       },
       decor: {
@@ -2313,7 +2425,9 @@
         choices: [
           { id: "decor_seasonal", name: "🌸 Tự Động Theo Mùa" },
           { id: "decor_books", name: "📚 Sách Cũ & Nến" },
-          { id: "decor_gramophone", name: "🎶 Đĩa Than & Cây" }
+          { id: "decor_gramophone", name: "🎶 Đĩa Than & Cây" },
+          { id: "decor_deck", name: "🎴 Chồng Bài Phát Sáng", requires: "secret_card_17" },
+          { id: "decor_keepsakes", name: "🏺 Kệ Bảy Kỷ Vật", requires: "secret_keepsakes" }
         ]
       }
     };
@@ -2351,7 +2465,9 @@
         discoveredEasterEggs: {},
         postcards: {},
         drinkAlbum: [],
-        stickyNotes: []
+        stickyNotes: [],
+        unlockedSecrets: {},
+        clockTapCount: 0
       };
     }
 
@@ -2390,7 +2506,9 @@
         discoveredEasterEggs: safeObj(rawObj.discoveredEasterEggs, {}),
         postcards: safeObj(rawObj.postcards, {}),
         drinkAlbum: Array.isArray(rawObj.drinkAlbum) ? rawObj.drinkAlbum.slice(0, 40) : [],
-        stickyNotes: Array.isArray(rawObj.stickyNotes) ? rawObj.stickyNotes.slice(0, 35) : []
+        stickyNotes: Array.isArray(rawObj.stickyNotes) ? rawObj.stickyNotes.slice(0, 35) : [],
+        unlockedSecrets: safeObj(rawObj.unlockedSecrets, {}),
+        clockTapCount: Math.max(0, Number(rawObj.clockTapCount) || 0)
       };
     }
 
@@ -2501,7 +2619,10 @@
         dialogueLog: [],
         weekResults: [],
         allMonthResults: [],
-        previousNightRadioNews: ""
+        previousNightRadioNews: "",
+        awaitingNightStart: true,
+        encounterReplyText: "",
+        monthCounted: false
       };
     }
 
@@ -2511,10 +2632,27 @@
       try {
         const parsed = JSON.parse(raw);
         if (!parsed || !Array.isArray(parsed.schedule) || parsed.schedule.length !== 28) return null;
-        return parsed;
+        return normalizeRunState(parsed);
       } catch (err) {
         return null;
       }
+    }
+
+    function normalizeRunState(parsed) {
+      if (!parsed || !Array.isArray(parsed.schedule) || parsed.schedule.length !== 28) return null;
+      if (typeof parsed.nightIndex !== "number" || !isFinite(parsed.nightIndex)) return null;
+      const valid = parsed.schedule.every(
+        (s) =>
+          s &&
+          Array.isArray(s.guests) &&
+          s.guests.length > 0 &&
+          s.guests.every((id) => CHARACTERS[id]) &&
+          (s.type === "solo" || (s.type === "duo" && DUO_PAIRINGS[s.duoId]))
+      );
+      if (!valid) return null;
+      const base = createNewRunState();
+      base.awaitingNightStart = false;
+      return { ...base, ...parsed, nightIndex: Math.max(0, Math.min(28, Math.floor(parsed.nightIndex))) };
     }
 
     let runState = loadRunState();
@@ -2743,7 +2881,7 @@
             notes = this.getActiveSeason().notes;
           } else {
             const ch = LOFI_CHANNELS.find((c) => c.id === chId);
-            if (ch) notes = ch.notes;
+            if (ch && (!ch.requires || isSecretUnlocked(ch.requires))) notes = ch.notes;
           }
           const freq = notes[this.stepIdx % notes.length];
           this.stepIdx++;
@@ -3153,10 +3291,16 @@
         this.hitboxes = [];
 
         const season = this.getActiveSeason();
-        const custom = persistentArchive.cafeCustom || {
-          lantern: "lantern_classic",
-          counter: "wood_oak",
-          decor: "decor_seasonal"
+        const rawCustom = persistentArchive.cafeCustom || {};
+        const pickCustom = (slot, def) => {
+          const v = rawCustom[slot] || def;
+          const opt = CAFE_CUSTOM_OPTIONS[slot].choices.find((c) => c.id === v);
+          return opt && (!opt.requires || isSecretUnlocked(opt.requires)) ? v : def;
+        };
+        const custom = {
+          lantern: pickCustom("lantern", "lantern_classic"),
+          counter: pickCustom("counter", "wood_oak"),
+          decor: pickCustom("decor", "decor_seasonal")
         };
 
         // 1. Cozy Wooden Wall Background
@@ -3212,21 +3356,33 @@
 
         const clockX = shelfX + shelfW * 0.5;
         const clockY = h * 0.11;
+        const clockSecret = isSecretUnlocked("secret_clock");
         ctx.fillStyle = "#1c1917";
         ctx.beginPath();
         ctx.arc(clockX, clockY, 13, 0, Math.PI * 2);
         ctx.fill();
-        ctx.strokeStyle = "#f59e0b";
-        ctx.lineWidth = 1.6;
+        ctx.strokeStyle = clockSecret ? "#fde047" : "#f59e0b";
+        ctx.lineWidth = clockSecret ? 2.6 : 1.6;
         ctx.stroke();
         ctx.strokeStyle = "#fef3c7";
         ctx.lineWidth = 1.4;
         ctx.beginPath();
-        ctx.moveTo(clockX, clockY);
-        ctx.lineTo(clockX, clockY - 7);
-        ctx.moveTo(clockX, clockY);
-        ctx.lineTo(clockX + 4, clockY - 3);
+        if (clockSecret) {
+          const nowDate = new Date();
+          const minA = (nowDate.getMinutes() / 60) * Math.PI * 2 - Math.PI / 2;
+          const hourA = ((nowDate.getHours() % 12) / 12 + nowDate.getMinutes() / 720) * Math.PI * 2 - Math.PI / 2;
+          ctx.moveTo(clockX, clockY);
+          ctx.lineTo(clockX + Math.cos(minA) * 9, clockY + Math.sin(minA) * 9);
+          ctx.moveTo(clockX, clockY);
+          ctx.lineTo(clockX + Math.cos(hourA) * 6, clockY + Math.sin(hourA) * 6);
+        } else {
+          ctx.moveTo(clockX, clockY);
+          ctx.lineTo(clockX, clockY - 7);
+          ctx.moveTo(clockX, clockY);
+          ctx.lineTo(clockX + 4, clockY - 3);
+        }
         ctx.stroke();
+        this.hitboxes.push({ id: "clock", x: clockX - 15, y: clockY - 15, w: 30, h: 30 });
 
         // 3. Multi-Pane Night Window
         const winX = w * 0.68;
@@ -3304,6 +3460,19 @@
         ctx.fillStyle = "#5c2d16";
         ctx.fillRect(winX - 4, winY + winH, winW + 8, 5);
 
+        if (isSecretUnlocked("secret_seasons")) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.roundRect(winX, winY, winW, winH, 8);
+          ctx.clip();
+          const dawnGrad = ctx.createLinearGradient(0, winY + winH * 0.5, 0, winY + winH);
+          dawnGrad.addColorStop(0, "rgba(251, 191, 36, 0)");
+          dawnGrad.addColorStop(1, "rgba(251, 191, 36, 0.4)");
+          ctx.fillStyle = dawnGrad;
+          ctx.fillRect(winX, winY, winW, winH);
+          ctx.restore();
+        }
+
         this.hitboxes.push({ id: "window", x: winX, y: winY, w: winW, h: winH });
 
         // 4. Custom Lantern Lighting & Volumetric Warm Cone
@@ -3342,6 +3511,25 @@
             ctx.arc(w * sx, sy, 3.6, 0, Math.PI * 2);
             ctx.fill();
           });
+        } else if (custom.lantern === "lantern_moon") {
+          ctx.strokeStyle = "#a8a29e";
+          ctx.lineWidth = 1.4;
+          ctx.beginPath();
+          ctx.moveTo(lanternX, 0);
+          ctx.lineTo(lanternX, lanternY - 14);
+          ctx.stroke();
+          ctx.save();
+          ctx.shadowColor = "rgba(253, 230, 138, 0.9)";
+          ctx.shadowBlur = 16;
+          ctx.fillStyle = "#fde68a";
+          ctx.beginPath();
+          ctx.arc(lanternX, lanternY, 13, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+          ctx.fillStyle = season.bgTop;
+          ctx.beginPath();
+          ctx.arc(lanternX + 7, lanternY - 3, 11, 0, Math.PI * 2);
+          ctx.fill();
         } else if (custom.lantern === "lantern_vintage") {
           ctx.strokeStyle = "#b45309";
           ctx.lineWidth = 2;
@@ -3387,6 +3575,16 @@
         const waveActive = this.bunnyWaveTimer > 0;
         if (this.bunnyWaveTimer > 0) this.bunnyWaveTimer -= 16;
         this.drawBunnyBarista(ctx, bunnyX, counterY + 2, portraitScale, waveActive, isTalkingNow, timeSec);
+        if (isSecretUnlocked("secret_master")) {
+          ctx.save();
+          ctx.fillStyle = "#fde047";
+          ctx.shadowColor = "rgba(253, 224, 71, 0.95)";
+          ctx.shadowBlur = 10;
+          ctx.font = `${Math.round(16 * portraitScale)}px Inter`;
+          ctx.textAlign = "center";
+          ctx.fillText("★", bunnyX, counterY - 104 * portraitScale + Math.sin(timeSec * 2.5) * 2);
+          ctx.restore();
+        }
         this.hitboxes.push({
           id: "bunny",
           x: bunnyX - 32 * portraitScale,
@@ -3418,7 +3616,9 @@
 
         // 6. Custom Wooden Bar Counter
         const woodPalette =
-          custom.counter === "wood_walnut"
+          custom.counter === "wood_gold"
+            ? { top: "#92400e", body: "#2a1a0e", trim: "#fbbf24" }
+            : custom.counter === "wood_walnut"
             ? { top: "#44281d", body: "#24140e", trim: "#78350f" }
             : custom.counter === "wood_linen"
             ? { top: "#7c2d12", body: "#3b1d14", trim: "#f59e0b" }
@@ -3454,6 +3654,11 @@
           ctx.fill();
           ctx.fillStyle = "#d97706";
           ctx.fillRect(cupX - 6, cupY - 10, 12, 4);
+          if (isSecretUnlocked("secret_perfect")) {
+            ctx.strokeStyle = "#fbbf24";
+            ctx.lineWidth = 1.6;
+            ctx.strokeRect(cupX - 7, cupY - 12, 14, 12);
+          }
           ctx.strokeStyle = "rgba(255,255,255,0.45)";
           ctx.lineWidth = 1.2;
           const steamShift = Math.sin(timeSec * 3) * 2;
@@ -3467,7 +3672,43 @@
         const decorX = w * 0.87;
         const decorY = counterY;
         const activeDecor = custom.decor || "decor_seasonal";
-        if (activeDecor === "decor_books") {
+        if (activeDecor === "decor_deck") {
+          ctx.save();
+          ctx.shadowColor = "rgba(253, 224, 71, 0.9)";
+          ctx.shadowBlur = 12;
+          [[-0.3, "#fef3c7"], [0, "#fde68a"], [0.28, "#fbbf24"]].forEach(([rot, col], i) => {
+            ctx.save();
+            ctx.translate(decorX - 2 + i * 4, decorY - 4);
+            ctx.rotate(rot);
+            ctx.fillStyle = col;
+            ctx.fillRect(-7, -20, 14, 20);
+            ctx.strokeStyle = "#92400e";
+            ctx.lineWidth = 1;
+            ctx.strokeRect(-7, -20, 14, 20);
+            ctx.restore();
+          });
+          ctx.restore();
+        } else if (activeDecor === "decor_keepsakes") {
+          ctx.fillStyle = "#451a03";
+          ctx.fillRect(decorX - 26, decorY - 6, 52, 6);
+          let gotAll = true;
+          STANDARD_GUEST_ORDER.forEach((gid, i) => {
+            const got = Boolean(persistentArchive.unlockedKeepsakes[gid]);
+            if (!got) gotAll = false;
+            ctx.globalAlpha = got ? 1 : 0.3;
+            ctx.fillStyle = CHARACTERS[gid].outfitColor;
+            ctx.beginPath();
+            ctx.arc(decorX - 22 + i * 7.4, decorY - 11, 3.2, 0, Math.PI * 2);
+            ctx.fill();
+          });
+          ctx.globalAlpha = 1;
+          if (gotAll) {
+            ctx.fillStyle = `rgba(253, 224, 71, ${0.12 + 0.1 * Math.sin(timeSec * 2)})`;
+            ctx.beginPath();
+            ctx.ellipse(decorX, decorY - 10, 30, 12, 0, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        } else if (activeDecor === "decor_books") {
           ctx.fillStyle = "#991b1b";
           ctx.fillRect(decorX - 16, decorY - 8, 28, 7);
           ctx.fillStyle = "#1e3a8a";
@@ -3553,6 +3794,13 @@
         ctx.lineTo(catX + 12, catY - 7);
         ctx.fill();
 
+        if (isSecretUnlocked("secret_cat")) {
+          ctx.fillStyle = "#fbbf24";
+          ctx.beginPath();
+          ctx.arc(catX + 9, catY + 4, 2.6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
         if (this.catPurrTimer > 0) {
           this.catPurrTimer -= 16;
           ctx.fillStyle = "#fda4af";
@@ -3570,6 +3818,21 @@
         for (let i = this.hitboxes.length - 1; i >= 0; i--) {
           const box = this.hitboxes[i];
           if (x >= box.x && x <= box.x + box.w && y >= box.y && y <= box.y + box.h) {
+            if (box.id === "clock") {
+              persistentArchive.clockTapCount = (persistentArchive.clockTapCount || 0) + 1;
+              saveArchive();
+              audioEngine.playChime(392 + (persistentArchive.clockTapCount % 7) * 40, 0.2, 0.035);
+              if (isSecretUnlocked("secret_clock")) {
+                const d = new Date();
+                const hh = String(d.getHours()).padStart(2, "0");
+                const mm = String(d.getMinutes()).padStart(2, "0");
+                showToast(`🕰️ Bây giờ là ${hh}:${mm} — giờ thứ hai mươi lăm vẫn luôn chờ bạn.`);
+              } else {
+                showToast("🕰️ Tích tắc... kim đồng hồ khẽ rung lên một nhịp.");
+              }
+              checkAndUnlockAchievements();
+              return;
+            }
             if (box.id === "cat") {
               this.catPurrTimer = 1500;
               persistentArchive.petCatCount = (persistentArchive.petCatCount || 0) + 1;
@@ -3824,6 +4087,9 @@
       }
 
       runState.nightIndex = nightIdx;
+      runState.awaitingNightStart = false;
+      runState.encounterReplyText = "";
+      runState.dialogueLog = [];
       runState.beatIndex = 0;
       runState.subBeat = 0;
       runState.nightStances = [];
@@ -3841,6 +4107,7 @@
         persistentArchive.visitedSeasons[nextSeason.id] = true;
         saveArchive();
         audioEngine.applySeasonSoundscape();
+        checkAndUnlockAchievements();
       }
 
       if (runState.shiftMode === "midnight_mysteries") {
@@ -3886,6 +4153,19 @@
         playOriginSequence(launchNightCutscenes);
       } else {
         launchNightCutscenes();
+      }
+    }
+
+    function resumeRun() {
+      if (!runState) {
+        switchScreen("screen-rules");
+        return;
+      }
+      switchScreen("screen-game");
+      if (runState.awaitingNightStart || runState.nightIndex >= 28) {
+        startNight(runState.nightIndex);
+      } else {
+        renderCurrentBeat();
       }
     }
 
@@ -3948,7 +4228,11 @@
           setDialogue("Thỏ Con", "Chủ Quán Nửa Đêm", "🐰", extra.hostEmpathy, true);
         }
       } else if (beat === 2) {
-        if (runState.activeEncounter && !runState.lastChoiceReplyText) {
+        if (runState.encounterReplyText) {
+          setDialogue("Sự Kiện Nửa Đêm", "Dư Âm Đêm Khuya", "🕯️", runState.encounterReplyText, true);
+          return;
+        }
+        if (runState.activeEncounter) {
           const enc = runState.activeEncounter;
           setDialogue("Sự Kiện Nửa Đêm", enc.title, "🕯️", enc.prompt, false);
           enc.choices.forEach((c) => {
@@ -3960,7 +4244,7 @@
               e.stopPropagation();
               runState.trust += c.deltaTrust;
               runState.clarity += c.deltaClarity;
-              runState.lastChoiceReplyText = c.reply;
+              runState.encounterReplyText = c.reply;
               runState.activeEncounter = null;
               saveRunState();
               syncGameHUD();
@@ -4018,8 +4302,11 @@
           setDialogue(guest.name, guest.role, guest.avatar, extra.drinkMemory, true);
         }
       } else if (beat === 4) {
-        persistentArchive.discoveredEasterEggs.egg_deep_night = true;
-        saveArchive();
+        if (!persistentArchive.discoveredEasterEggs.egg_deep_night) {
+          persistentArchive.discoveredEasterEggs.egg_deep_night = true;
+          saveArchive();
+          checkAndUnlockAchievements();
+        }
         renderDrinkCardBeat([guest]);
       } else if (beat === 5) {
         if (runState.lastChoiceReplyText) {
@@ -4103,7 +4390,11 @@
           setDialogue(g2.name, g2.role, g2.avatar, dExtra.g2ToG1, true);
         }
       } else if (beat === 2) {
-        if (runState.activeEncounter && !runState.lastChoiceReplyText) {
+        if (runState.encounterReplyText) {
+          setDialogue("Sự Kiện Nửa Đêm", "Dư Âm Đêm Khuya", "🕯️", runState.encounterReplyText, true);
+          return;
+        }
+        if (runState.activeEncounter) {
           const enc = runState.activeEncounter;
           setDialogue("Sự Kiện Nửa Đêm", enc.title, "🕯️", enc.prompt, false);
           enc.choices.forEach((c) => {
@@ -4115,7 +4406,7 @@
               e.stopPropagation();
               runState.trust += c.deltaTrust;
               runState.clarity += c.deltaClarity;
-              runState.lastChoiceReplyText = c.reply;
+              runState.encounterReplyText = c.reply;
               runState.activeEncounter = null;
               saveRunState();
               syncGameHUD();
@@ -4163,8 +4454,11 @@
           setDialogue("Thỏ Con", "Chủ Quán Nửa Đêm", "🐰", dExtra.duoDrinkBanter, true);
         }
       } else if (beat === 4) {
-        persistentArchive.discoveredEasterEggs.egg_deep_night = true;
-        saveArchive();
+        if (!persistentArchive.discoveredEasterEggs.egg_deep_night) {
+          persistentArchive.discoveredEasterEggs.egg_deep_night = true;
+          saveArchive();
+          checkAndUnlockAchievements();
+        }
         renderDrinkCardBeat(guests);
       } else if (beat === 5) {
         if (runState.lastChoiceReplyText) {
@@ -4637,13 +4931,14 @@
         drinkName = accNames.length > 0 ? `${base.name} (${accNames.join(" & ")})` : base.name;
       }
 
+      const affinityAvg = (matchScore - challengeBonus) / guests.length;
       let quality = "☕ Mộc Mạc";
-      if (matchScore >= 5 || challengeBonus === 2) {
+      if ((affinityAvg >= 4 && challengeBonus === 2) || affinityAvg >= 6) {
         quality = "🌟 Hoàn Hảo";
         runState.trust += 1;
         runState.clarity += 1;
         persistentArchive.perfectBrewsCount = (persistentArchive.perfectBrewsCount || 0) + 1;
-      } else if (matchScore >= 3) {
+      } else if (affinityAvg >= 2 || (affinityAvg >= 1 && challengeBonus === 2)) {
         quality = "✨ Chuẩn Vị";
         runState.trust += 1;
       }
@@ -4842,6 +5137,13 @@
       const actionArea = document.getElementById("dialogue-action-area");
       if (actionArea && actionArea.children.length > 0) return;
 
+      if (runState.encounterReplyText) {
+        runState.encounterReplyText = "";
+        saveRunState();
+        renderCurrentBeat();
+        return;
+      }
+
       const slot = getCurrentNightSlot();
       const guests = getCurrentNightGuests();
       const beat = runState.beatIndex;
@@ -5017,6 +5319,9 @@
       runState.allMonthResults.push(nightResultObj);
 
       runState.nightIndex += 1;
+      runState.awaitingNightStart = true;
+      runState.beatIndex = 0;
+      runState.subBeat = 0;
       saveArchive();
       saveRunState();
       checkAndUnlockAchievements();
@@ -5038,9 +5343,13 @@
       const completedWeeks = Math.min(4, Math.ceil(runState.nightIndex / 7));
 
       if (isMonthComplete) {
-        persistentArchive.playthroughCount = (persistentArchive.playthroughCount || 0) + 1;
-        persistentArchive.completedModes[runState.shiftMode] = true;
-        saveArchive();
+        if (!runState.monthCounted) {
+          runState.monthCounted = true;
+          persistentArchive.playthroughCount = (persistentArchive.playthroughCount || 0) + 1;
+          persistentArchive.completedModes[runState.shiftMode] = true;
+          saveArchive();
+          saveRunState();
+        }
         checkAndUnlockAchievements();
         updateAllProgressBadges();
 
@@ -5117,7 +5426,6 @@
       saveRunState();
 
       const highlightLines = prevResults
-        .slice(0, 4)
         .map((r) => `• ${r.guestNames} (${r.endingTitle})`)
         .join("\n");
 
@@ -5148,7 +5456,7 @@
 
     function startSecretNight8Reunion() {
       if (!isNight8Unlocked()) {
-        showToast("🔒 Cần sưu tầm ít nhất 3 Kỷ vật hoặc mở 5 Kết cục để mở Đêm Hội Ngộ!");
+        showToast("🔒 Cánh cửa này vẫn chưa mở… hãy cứ trò chuyện cùng khách thêm nữa.");
         return;
       }
       cancelActiveBrewAnimation();
@@ -5176,19 +5484,78 @@
             saveArchive();
             updateAllProgressBadges();
             showToast("🏆 Mở khóa danh hiệu: Trái Tim Tiệm Nước!");
+            checkAndUnlockAchievements();
           }
-          if (!runState || runState.nightIndex >= 28) {
+          if (!runState) {
             switchScreen("screen-welcome");
             return;
           }
-          renderCurrentBeat();
+          resumeRun();
         });
         actionArea.appendChild(btn);
       });
     }
 
-    function checkAndUnlockAchievements() {
+    function isSecretUnlocked(id) {
+      return Boolean(persistentArchive.unlockedSecrets && persistentArchive.unlockedSecrets[id]);
+    }
+
+    function getSecretProgress(id) {
       const a = persistentArchive;
+      switch (id) {
+        case "secret_message":
+          return [EASTER_EGGS.filter((e) => a.discoveredEasterEggs[e.id]).length, EASTER_EGGS.length];
+        case "secret_card_17":
+          return [DRINK_CARDS.filter((c) => a.unlockedDrinkCards[c.id]).length, DRINK_CARDS.length];
+        case "secret_signature":
+          return [SIGNATURE_RECIPES.filter((s) => a.unlockedSignatures[s.id]).length, SIGNATURE_RECIPES.length];
+        case "secret_keepsakes":
+          return [STANDARD_GUEST_ORDER.filter((g) => a.unlockedKeepsakes[g]).length, STANDARD_GUEST_ORDER.length];
+        case "secret_endings":
+          return [Math.min(33, Object.keys(a.unlockedEndings).length), 33];
+        case "secret_cat":
+          return [Math.min(20, a.petCatCount || 0), 20];
+        case "secret_clock":
+          return [Math.min(7, a.clockTapCount || 0), 7];
+        case "secret_seasons":
+          return [SEASON_THEMES.filter((s) => a.visitedSeasons[s.id]).length, SEASON_THEMES.length];
+        case "secret_perfect":
+          return [Math.min(10, a.perfectBrewsCount || 0), 10];
+        case "secret_master": {
+          const others = SECRET_VAULT.filter((s) => s.id !== "secret_master" && a.unlockedSecrets[s.id]).length;
+          return [others + (a.unlockedAchievements.ach_night_8 ? 1 : 0), SECRET_VAULT.length];
+        }
+        default:
+          return [0, 1];
+      }
+    }
+
+    function checkSecrets() {
+      const a = persistentArchive;
+      if (!a.unlockedSecrets) a.unlockedSecrets = {};
+      let changed = false;
+      SECRET_VAULT.forEach((s) => {
+        if (a.unlockedSecrets[s.id]) return;
+        const [cur, max] = getSecretProgress(s.id);
+        if (cur >= max) {
+          a.unlockedSecrets[s.id] = true;
+          a.unlockedCutscenes[s.id] = true;
+          changed = true;
+          showToast(`🗝️ Bí mật mới: ${s.title}! Mở Kho Bí Mật trong Menu để xem.`);
+          audioEngine.playChime(783.99, 0.5, 0.05);
+        }
+      });
+      if (changed) {
+        saveArchive();
+        updateAllProgressBadges();
+      }
+      return changed;
+    }
+
+    function checkAndUnlockAchievements() {
+      checkSecrets();
+      const a = persistentArchive;
+      const secretsCount = Object.keys(a.unlockedSecrets).length;
       const endingsCount = Object.keys(a.unlockedEndings).length;
       const keepsakesCount = Object.keys(a.unlockedKeepsakes).length;
       const cardsCount = Object.keys(a.unlockedDrinkCards).length;
@@ -5213,7 +5580,9 @@
         ach_cards_16: cardsCount >= 16,
         ach_pet_cat: a.petCatCount >= 5,
         ach_peace_all: eggsCount >= 5,
-        ach_perfect_brew: a.perfectBrewsCount >= 3
+        ach_perfect_brew: a.perfectBrewsCount >= 3,
+        ach_secret_5: secretsCount >= 5,
+        ach_secret_all: secretsCount >= SECRET_VAULT.length
       };
 
       let newlyUnlocked = false;
@@ -5249,7 +5618,7 @@
       document.getElementById("rules-endings-stat").textContent = `${Object.keys(persistentArchive.unlockedEndings).length}/33`;
       document.getElementById("rules-keepsakes-stat").textContent = `${Object.keys(persistentArchive.unlockedKeepsakes).length}/7`;
       document.getElementById("rules-cards-stat").textContent = `${Object.keys(persistentArchive.unlockedDrinkCards).length}/16`;
-      document.getElementById("rules-sig-stat").textContent = `${Object.keys(persistentArchive.unlockedSignatures).length}/6`;
+      document.getElementById("rules-sig-stat").textContent = `${Object.keys(persistentArchive.unlockedSignatures).length}`;
 
       const sel = document.getElementById("title-selector");
       sel.innerHTML = `<option value="auto">Tự động chọn danh hiệu cao nhất</option>`;
@@ -5302,7 +5671,7 @@
     function updateAllProgressBadges() {
       const a = persistentArchive;
       document.getElementById("mobile-cutscene-badge").textContent = `${Object.keys(a.unlockedCutscenes).length}/${CUTSCENE_CATALOG.length}`;
-      document.getElementById("mobile-album-badge").textContent = `${Object.keys(a.unlockedSignatures).length}/6`;
+      document.getElementById("mobile-album-badge").textContent = `${Object.keys(a.unlockedSignatures).length}`;
       document.getElementById("mobile-drink-deck-badge").textContent = `${Object.keys(a.unlockedDrinkCards).length}/16`;
       document.getElementById("mobile-keepsakes-badge").textContent = `${Object.keys(a.unlockedKeepsakes).length}/7`;
       document.getElementById("mobile-endings-badge").textContent = `${Object.keys(a.unlockedEndings).length}/33`;
@@ -5326,8 +5695,16 @@
       document.getElementById("mobile-cassette-badge").textContent = `${Object.keys(a.unlockedCassettes).length}/7`;
       document.getElementById("mobile-postcard-badge").textContent = `${Object.keys(a.postcards).length}/7`;
       document.getElementById("mobile-ach-badge").textContent = `${Object.keys(a.unlockedAchievements).length}/${ACHIEVEMENTS.length}`;
-      document.getElementById("mobile-easter-badge").textContent = `${Object.keys(a.discoveredEasterEggs).length}/5`;
+      {
+        const eggFound = EASTER_EGGS.filter((e) => a.discoveredEasterEggs[e.id]).length;
+        document.getElementById("mobile-easter-badge").textContent = eggFound > 0 ? `${eggFound}` : "?";
+      }
       document.getElementById("mobile-night8-badge").textContent = isNight8Unlocked() ? "✨ Mở" : "🔒";
+      const secretsBadge = document.getElementById("mobile-secrets-badge");
+      const secretsFound = Object.keys(a.unlockedSecrets || {}).length;
+      if (secretsBadge) secretsBadge.textContent = `${secretsFound}`;
+      const secretsBtn = document.getElementById("btn-drawer-secrets");
+      if (secretsBtn) secretsBtn.classList.toggle("hidden", secretsFound === 0);
     }
 
     function openCutsceneGallery() {
@@ -5360,24 +5737,23 @@
     }
 
     function openDrinkAlbumModal() {
-      document.getElementById("signature-menu-count").textContent = `${Object.keys(persistentArchive.unlockedSignatures).length}/6`;
+      document.getElementById("signature-menu-count").textContent = `${Object.keys(persistentArchive.unlockedSignatures).length}`;
       const sigGrid = document.getElementById("signature-recipes-grid");
       sigGrid.innerHTML = "";
-      SIGNATURE_RECIPES.forEach((sig) => {
-        const unlocked = Boolean(persistentArchive.unlockedSignatures[sig.id]);
+      const foundSigs = SIGNATURE_RECIPES.filter((sig) => persistentArchive.unlockedSignatures[sig.id]);
+      foundSigs.forEach((sig) => {
         const card = document.createElement("div");
-        card.className = `p-3 rounded-2xl border ${
-          unlocked ? "bg-amber-500/15 border-amber-400/40" : "bg-stone-950/90 border-stone-800"
-        }`;
+        card.className = "p-3 rounded-2xl border bg-amber-500/15 border-amber-400/40";
         card.innerHTML = `
-          <div class="font-bold text-xs ${unlocked ? "text-amber-200" : "text-stone-400"}">
-            ${unlocked ? `✨ ${sig.name}` : "🔒 Công Thức Độc Quyền Bí Ẩn"}
-          </div>
-          <div class="text-[11px] text-amber-300/80 mt-1">Gợi ý: ${sig.hint}</div>
-          <div class="text-[11px] text-stone-400 mt-1">${unlocked ? sig.desc : "Hãy thử phối đúng cốt nước và 2 thảo mộc theo gợi ý!"}</div>
+          <div class="font-bold text-xs text-amber-200">✨ ${sig.name}</div>
+          <div class="text-[11px] text-amber-300/80 mt-1">Công thức: ${sig.hint}</div>
+          <div class="text-[11px] text-stone-400 mt-1">${sig.desc}</div>
         `;
         sigGrid.appendChild(card);
       });
+      if (foundSigs.length === 0) {
+        sigGrid.innerHTML = `<div class="text-xs text-stone-400 sm:col-span-2">Quán chưa có công thức bí truyền nào được ghi lại… Có lẽ chúng sẽ tự lộ ra khi bạn pha đúng một sự kết hợp đặc biệt.</div>`;
+      }
 
       const albumGrid = document.getElementById("drink-album-grid");
       albumGrid.innerHTML = "";
@@ -5389,8 +5765,8 @@
           el.className = "p-2.5 rounded-xl bg-stone-900/90 border border-stone-800 text-xs flex items-center justify-between gap-2";
           el.innerHTML = `
             <div>
-              <div class="font-semibold text-stone-100">${item.name}</div>
-              <div class="text-[10px] text-stone-400">Phục vụ: ${item.guestName}</div>
+              <div class="font-semibold text-stone-100">${escapeHtml(item.name)}</div>
+              <div class="text-[10px] text-stone-400">Phục vụ: ${escapeHtml(item.guestName)}</div>
             </div>
             <span class="text-[11px] font-mono-code text-amber-300 shrink-0">${item.quality}</span>
           `;
@@ -5432,7 +5808,7 @@
           <div class="text-2xl">${unlocked ? g.keepsake.icon : "🔒"}</div>
           <div class="space-y-1 text-xs">
             <div class="font-bold ${unlocked ? "text-teal-200" : "text-stone-400"}">${unlocked ? g.keepsake.name : `Kỷ vật từ ${g.name.split(" (")[0]}`}</div>
-            <p class="text-stone-300">${unlocked ? g.keepsake.desc : "Hoàn thành một đêm trò chuyện thấu hiểu cùng vị khách này để nhận kỷ vật."}</p>
+            <p class="text-stone-300">${unlocked ? g.keepsake.desc : "???"}</p>
           </div>
         `;
         grid.appendChild(el);
@@ -5526,15 +5902,15 @@
           <div class="font-bold text-sm text-purple-200">${d.avatar} ${d.name}</div>
           <div class="p-2 rounded-xl bg-stone-950 border border-stone-800">
             <span class="text-amber-300 font-semibold">Tầng 1 (Tiểu Sử):</span>
-            <span class="text-stone-300">${t1 ? d.tier1 : "🔒 Hoàn thành 1 đêm trò chuyện để mở."}</span>
+            <span class="text-stone-300">${t1 ? d.tier1 : "🔒 ???"}</span>
           </div>
           <div class="p-2 rounded-xl bg-stone-950 border border-stone-800">
             <span class="text-teal-300 font-semibold">Tầng 2 (Góc Khuất):</span>
-            <span class="text-stone-300">${t2 ? d.tier2 : "🔒 Nhận Kỷ vật của nhân vật để mở."}</span>
+            <span class="text-stone-300">${t2 ? d.tier2 : "🔒 ???"}</span>
           </div>
           <div class="p-2 rounded-xl bg-stone-950 border border-stone-800">
             <span class="text-emerald-300 font-semibold">Tầng 3 (Hậu Truyện 6 Tháng):</span>
-            <span class="text-stone-300">${t3 ? d.tier3 : "🔒 Nhận Bưu thiếp bình minh để mở."}</span>
+            <span class="text-stone-300">${t3 ? d.tier3 : "🔒 ???"}</span>
           </div>
         `;
         grid.appendChild(card);
@@ -5581,10 +5957,10 @@
           el.className = "p-3 rounded-2xl bg-amber-200/10 border border-amber-300/30 text-xs space-y-1";
           el.innerHTML = `
             <div class="flex justify-between font-mono-code text-[10px] text-amber-300">
-              <span>${n.guestName}</span>
-              <span>${n.nightLabel}</span>
+              <span>${escapeHtml(n.guestName)}</span>
+              <span>${escapeHtml(n.nightLabel)}</span>
             </div>
-            <p class="font-serif-story italic text-stone-200">"${n.text}"</p>
+            <p class="font-serif-story italic text-stone-200">"${escapeHtml(n.text)}"</p>
           `;
           grid.appendChild(el);
         });
@@ -5641,11 +6017,11 @@
         }`;
         el.innerHTML = `
           <div>
-            <div class="font-bold ${unlocked ? "text-amber-200" : "text-stone-400"}">${unlocked ? "🏆" : "🔒"} ${ach.title}</div>
-            <div class="text-stone-300 mt-0.5">${ach.desc}</div>
+            <div class="font-bold ${unlocked ? "text-amber-200" : "text-stone-400"}">${unlocked ? "🏆" : "🔒"} ${unlocked ? ach.title : "Thành Tựu Ẩn"}</div>
+            <div class="text-stone-300 mt-0.5">${unlocked ? ach.desc : "Cứ thong thả pha nước và trò chuyện — điều bất ngờ sẽ tự tìm đến."}</div>
           </div>
           <span class="px-2.5 py-1 rounded-xl bg-stone-900 border border-stone-700 font-mono-code text-[10px] text-amber-300 shrink-0">
-            ${ach.titleReward}
+            ${unlocked ? ach.titleReward : "???"}
           </span>
         `;
         grid.appendChild(el);
@@ -5653,21 +6029,67 @@
       openModal("modal-achievements");
     }
 
+    function openSecretsModal() {
+      const grid = document.getElementById("secrets-grid");
+      grid.innerHTML = "";
+      const unlockedCount = Object.keys(persistentArchive.unlockedSecrets || {}).length;
+      document.getElementById("secrets-count").textContent = `${unlockedCount}`;
+
+      SECRET_VAULT.forEach((s) => {
+        if (!isSecretUnlocked(s.id)) return;
+        const card = document.createElement("div");
+        card.className = "p-3.5 rounded-2xl border text-xs space-y-2 bg-fuchsia-500/10 border-fuchsia-400/40";
+        card.innerHTML = `
+          <div class="font-bold text-sm text-fuchsia-200">${s.icon} ${s.title}</div>
+          <p class="font-serif-story italic text-stone-200 leading-relaxed">${s.story}</p>
+          <div class="text-[11px] text-emerald-300">🎁 ${s.reward}</div>
+        `;
+        const playBtn = document.createElement("button");
+        playBtn.type = "button";
+        playBtn.className = "px-3 py-1.5 rounded-xl bg-fuchsia-500/20 hover:bg-fuchsia-500/30 border border-fuchsia-400/45 text-fuchsia-100 text-[11px] font-semibold cursor-pointer";
+        playBtn.textContent = "▶ Xem Lại Cảnh Bí Mật";
+        playBtn.addEventListener("click", () => {
+          closeModal("modal-secrets");
+          playCutscene(s.id, () => openSecretsModal());
+        });
+        card.appendChild(playBtn);
+        grid.appendChild(card);
+      });
+      if (unlockedCount === 0) {
+        grid.innerHTML = `<div class="text-xs text-stone-400">Chưa có bí mật nào được tìm thấy.</div>`;
+      }
+      openModal("modal-secrets");
+    }
+
     function openEasterEggsModal() {
+      const msgBox = document.getElementById("egg-message-box");
+      if (msgBox) {
+        const foundCount = EASTER_EGGS.filter((e) => persistentArchive.discoveredEasterEggs[e.id]).length;
+        const parts = EASTER_EGGS.filter((e) => persistentArchive.discoveredEasterEggs[e.id]).map((e) => EGG_FRAGMENTS[e.id]);
+        if (EASTER_EGGS.filter((e) => persistentArchive.discoveredEasterEggs[e.id]).length < EASTER_EGGS.length) parts.push("…");
+        const done = foundCount >= EASTER_EGGS.length;
+        msgBox.classList.toggle("hidden", foundCount === 0);
+        msgBox.innerHTML = `
+          <div class="text-[11px] font-mono-code text-amber-300 mb-1">💌 MỘT THÔNG ĐIỆP ĐANG DẦN HIỆN RA…</div>
+          <p class="font-serif-story italic ${done ? "text-amber-100 text-sm" : "text-stone-400"}">“${parts.join(" ")}”</p>
+        `;
+      }
       const grid = document.getElementById("easter-eggs-grid");
       grid.innerHTML = "";
       EASTER_EGGS.forEach((egg) => {
         const unlocked = Boolean(persistentArchive.discoveredEasterEggs[egg.id]);
+        if (!unlocked) return;
         const el = document.createElement("div");
-        el.className = `p-3 rounded-2xl border text-xs ${
-          unlocked ? "bg-emerald-500/15 border-emerald-400/40" : "bg-stone-950/80 border-stone-800"
-        }`;
+        el.className = "p-3 rounded-2xl border text-xs bg-emerald-500/15 border-emerald-400/40";
         el.innerHTML = `
           <div class="font-bold ${unlocked ? "text-emerald-200" : "text-stone-300"}">${unlocked ? egg.icon : "❓"} ${egg.name}</div>
-          <div class="text-stone-400 mt-1">${unlocked ? "✅ Đã khám phá!" : `Gợi ý: ${egg.hint}`}</div>
+          <div class="text-stone-400 mt-1">${unlocked ? `✅ Đã khám phá! Mảnh ghép: “${EGG_FRAGMENTS[egg.id]}”` : ""}</div>
         `;
         grid.appendChild(el);
       });
+      if (!grid.children.length) {
+        grid.innerHTML = `<div class="text-xs text-stone-400">Chưa có bí mật nào lộ diện… Quán nhỏ này còn nhiều điều bất ngờ đang chờ bạn.</div>`;
+      }
       openModal("modal-easter-eggs");
     }
 
@@ -5678,14 +6100,20 @@
       const chBox = document.getElementById("lofi-channels-list");
       chBox.innerHTML = "";
       LOFI_CHANNELS.forEach((ch) => {
-        const isSel = persistentArchive.selectedLofiChannel === ch.id;
+        if (ch.requires && !isSecretUnlocked(ch.requires)) return;
+        const chLocked = Boolean(ch.requires) && !isSecretUnlocked(ch.requires);
+        const isSel = persistentArchive.selectedLofiChannel === ch.id && !chLocked;
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = `p-2.5 rounded-xl border text-left cursor-pointer ${
           isSel ? "bg-amber-500/20 border-amber-400 text-amber-100" : "bg-stone-950 border-stone-800 text-stone-300"
-        }`;
-        btn.textContent = ch.name;
+        } ${chLocked ? "opacity-50" : ""}`;
+        btn.textContent = chLocked ? "🔒 Kênh Nhạc Bí Mật" : ch.name;
         btn.addEventListener("click", () => {
+          if (chLocked) {
+            showToast("🔒 Kênh nhạc bí mật — mở khóa trong Kho Bí Mật để nghe!");
+            return;
+          }
           persistentArchive.selectedLofiChannel = ch.id;
           saveArchive();
           audioEngine.startLofiLoop();
@@ -5733,6 +6161,7 @@
             persistentArchive.visitedSeasons[s.id] = true;
             saveArchive();
             audioEngine.applySeasonSoundscape();
+            checkAndUnlockAchievements();
             if (persistentArchive.selectedLofiChannel === "seasonal_auto") {
               audioEngine.startLofiLoop();
             }
@@ -5752,8 +6181,9 @@
           row.className = "space-y-1.5";
           row.innerHTML = `<div class="text-[11px] font-semibold text-stone-300">${group.label}</div>`;
           const btnsWrap = document.createElement("div");
-          btnsWrap.className = "grid grid-cols-3 gap-1.5";
+          btnsWrap.className = "grid grid-cols-2 sm:grid-cols-3 gap-1.5";
           group.choices.forEach((choice) => {
+            if (choice.requires && !isSecretUnlocked(choice.requires)) return;
             const activeVal = (persistentArchive.cafeCustom && persistentArchive.cafeCustom[slotKey]) || group.choices[0].id;
             const isSel = activeVal === choice.id;
             const cBtn = document.createElement("button");
@@ -5763,8 +6193,14 @@
                 ? "bg-amber-500/20 border-amber-400 text-amber-100 font-semibold"
                 : "bg-stone-950 border-stone-800 text-stone-300 hover:border-stone-600"
             }`;
-            cBtn.textContent = choice.name;
+            const cLocked = Boolean(choice.requires) && !isSecretUnlocked(choice.requires);
+            cBtn.textContent = cLocked ? "🔒 Phần Thưởng Bí Mật" : choice.name;
+            if (cLocked) cBtn.classList.add("opacity-50");
             cBtn.addEventListener("click", () => {
+              if (cLocked) {
+                showToast("🔒 Phần thưởng bí mật — hãy mở khóa bí mật tương ứng trong Kho Bí Mật!");
+                return;
+              }
               if (!persistentArchive.cafeCustom) persistentArchive.cafeCustom = {};
               persistentArchive.cafeCustom[slotKey] = choice.id;
               saveArchive();
@@ -5812,8 +6248,8 @@
           const item = document.createElement("div");
           item.className = "p-2.5 rounded-xl bg-stone-900/90 border border-stone-800 space-y-1";
           item.innerHTML = `
-            <div class="font-bold text-amber-200">${entry.avatar} ${entry.speaker}</div>
-            <p class="text-stone-300 whitespace-pre-line">${entry.text}</p>
+            <div class="font-bold text-amber-200">${escapeHtml(entry.avatar)} ${escapeHtml(entry.speaker)}</div>
+            <p class="text-stone-300 whitespace-pre-line">${escapeHtml(entry.text)}</p>
           `;
           list.appendChild(item);
         });
@@ -5889,12 +6325,7 @@
 
       document.getElementById("btn-welcome-continue").addEventListener("click", () => {
         audioEngine.ensureAutoStarted();
-        if (runState) {
-          switchScreen("screen-game");
-          renderCurrentBeat();
-        } else {
-          switchScreen("screen-rules");
-        }
+        resumeRun();
       });
 
       document.getElementById("btn-welcome-menu").addEventListener("click", () => {
@@ -5957,7 +6388,8 @@
         ambience: openAmbienceModal,
         postcards: openPostcardsModal,
         achievements: openAchievementsModal,
-        "easter-eggs": openEasterEggsModal
+        "easter-eggs": openEasterEggsModal,
+        secrets: openSecretsModal
       };
 
       document.querySelectorAll("[data-drawer-action]").forEach((btn) => {
@@ -6001,11 +6433,15 @@
           }
           persistentArchive = sanitizeArchive(parsed.archive);
           saveArchive();
-          if (parsed.run && Array.isArray(parsed.run.schedule) && parsed.run.schedule.length === 28) {
-            runState = parsed.run;
+          const normalizedRun = parsed.run ? normalizeRunState(parsed.run) : null;
+          if (normalizedRun) {
+            runState = normalizedRun;
             saveRunState();
           }
+          checkAndUnlockAchievements();
           updateAllProgressBadges();
+          const btnContinue = document.getElementById("btn-welcome-continue");
+          if (btnContinue) btnContinue.classList.toggle("hidden", !(runState && runState.nightIndex < 28));
           renderRulesScreenControls();
           syncGameHUD();
           showToast("✅ Khôi phục dữ liệu thành công!");
@@ -6138,6 +6574,7 @@
       try {
         bindAllUIEvents();
         updateAllProgressBadges();
+        checkAndUnlockAchievements();
         audioEngine.ensureAutoStarted();
         stageRenderer.resize();
         requestAnimationFrame(animateStageLoop);
