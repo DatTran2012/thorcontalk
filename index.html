@@ -352,6 +352,9 @@
         <button type="button" id="btn-drawer-secrets" data-drawer-action="secrets" class="hidden min-h-[44px] px-3 py-2 rounded-xl bg-fuchsia-500/15 hover:bg-fuchsia-500/25 border border-fuchsia-400/35 text-xs text-fuchsia-200 flex items-center justify-between cursor-pointer">
           <span>🗝️ Kho Bí Mật</span><span id="mobile-secrets-badge" class="font-mono-code text-[11px]">0</span>
         </button>
+        <button type="button" id="btn-twist-ending" class="hidden min-h-[44px] px-3 py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 border border-rose-400/45 text-xs text-rose-200 font-semibold flex items-center justify-between cursor-pointer">
+          <span>🕊️ Cánh Cửa Thứ Hai</span><span class="font-mono-code text-[11px]">✨</span>
+        </button>
         <button type="button" id="btn-night8-secret" class="min-h-[44px] px-3 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/45 text-xs text-amber-200 font-semibold flex items-center justify-between cursor-pointer">
           <span>🌅 Đêm Hội Ngộ</span><span id="mobile-night8-badge" class="font-mono-code text-[11px]">🔒</span>
         </button>
@@ -450,7 +453,7 @@
 
   <!-- Cutscene Player Modal -->
   <div id="modal-cutscene-player" class="hidden fixed inset-0 z-[60] bg-black/95 backdrop-blur-md flex items-center justify-center p-3 sm:p-6">
-    <div class="max-w-xl w-full cafe-panel rounded-3xl p-6 sm:p-8 text-center space-y-5 border border-amber-400/40">
+    <div class="max-w-xl w-full cafe-panel rounded-3xl p-6 sm:p-8 text-center space-y-5 border border-amber-400/40 max-h-[92dvh] overflow-y-auto">
       <div id="cs-player-location" class="inline-block px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/35 text-amber-300 font-mono-code text-[11px]">
         🌙 TIỆM NƯỚC NỬA ĐÊM
       </div>
@@ -460,7 +463,7 @@
       </div>
       <div id="cs-player-icon" class="text-5xl sm:text-6xl py-2 drop-shadow">🌧️☕</div>
       <h3 id="cs-player-title" class="font-serif-story text-xl sm:text-2xl font-bold text-amber-100">Khung Cảnh Đêm Mưa</h3>
-      <p id="cs-player-caption" class="font-serif-story italic text-sm sm:text-base text-stone-200 leading-relaxed">
+      <p id="cs-player-caption" class="font-serif-story italic text-sm sm:text-base text-stone-200 leading-relaxed whitespace-pre-line">
         Tiếng mưa rơi nhè nhẹ bên hiên quán...
       </p>
       <div class="pt-2">
@@ -2147,7 +2150,8 @@
         name: "Chủ Quán Thỏ Con — Người Gác Đêm",
         tier1: "Mở tiệm nước nhỏ cuối hẻm từ 00:00 đến 05:00 sáng, tin rằng một ly nước ấm và sự lắng nghe chân thành có thể xoa dịu mọi cơn bão lòng.",
         tier2: "Trước khi mở quán, Thỏ Con từng là một người thức trắng nhiều đêm vì lạc hướng giữa thành phố lớn, và được cứu rỗi bởi một tách trà ấm từ người lạ.",
-        tier3: "6 tháng sau: Ngọn đèn vàng của Thỏ Con Talk vẫn sáng đều mỗi đêm mưa, trở thành ngôi nhà thứ hai của những tâm hồn biết tử tế với nhau."
+        tier3: "6 tháng sau: Ngọn đèn vàng của Thỏ Con Talk vẫn sáng đều mỗi đêm mưa, trở thành ngôi nhà thứ hai của những tâm hồn biết tử tế với nhau.",
+        tier4: "Sự thật: Thỏ Con từng nhận chẩn đoán ung thư và có lúc không còn muốn ở lại. Một chén trà ấm, bảy cuộc đời và những buổi sáng ở bệnh viện đã giúp Thỏ Con chọn ở lại, mỗi ngày một lần."
       }
     ];
 
@@ -2218,6 +2222,23 @@
         hiddenProgress: true,
         story: "Khi mọi bí mật đã được kể, phía sau quầy gỗ hiện ra một cánh cửa nhỏ chưa từng có. Thỏ Con đẩy nhẹ: bên kia là con hẻm sáng nắng, và ở đầu hẻm, người chủ quán già đang đứng mỉm cười, gật đầu như muốn nói: “Cháu đã giữ đèn thay ta rất tốt.” Ngọn đèn vàng của Tiệm Nước Nửa Đêm sẽ sáng mãi."
       }
+    ];
+
+    const TWIST_CUTSCENES = [
+      { id: "twist_01", icon: "🐱📄🕊️", location: "CÁNH CỬA THỨ HAI • 05:00", title: "Tờ Giấy Hẹn Khám Dưới Chiếc Khăn Len",
+        caption: "Bánh Quy — chú mèo tam thể — nhảy xuống khỏi quầy, tha theo một tờ giấy gấp tư lọt ra từ túi tạp dề của Thỏ Con. Đó là lịch hẹn điều trị lúc 07:00 sáng tại bệnh viện, ghi tên một căn bệnh mà chưa ai trong quán từng nghe Thỏ Con nhắc tới: ung thư.\n\nBảy vị khách lặng đi. Hóa ra suốt những đêm qua, người lắng nghe tất cả mọi người... chưa từng kể cho ai nghe về chính mình." },
+      { id: "twist_02", icon: "🌧️📞", location: "KHỞI NGUỒN THẬT SỰ • ĐÊM MƯA BA NĂM TRƯỚC", title: "Đêm Mà Thỏ Con Không Còn Muốn Ở Lại",
+        caption: "Ba năm trước, sau cuộc gọi từ phòng khám, Thỏ Con đứng giữa phố mưa với tờ kết quả trong tay. Nỗi sợ, nỗi xấu hổ và cảm giác mình sẽ chỉ là gánh nặng chồng lên nhau, đến mức có một khoảnh khắc Thỏ Con tin rằng nếu mình biến mất khỏi thế giới này thì mọi người sẽ nhẹ nhõm hơn.\n\nĐó không phải sự yếu đuối. Đó là một nỗi đau quá lớn mà không có ai ở bên để chia bớt.\n\nRồi ánh đèn hiên của người chủ quán già sáng lên cuối hẻm, và một chén trà hoa cúc mật ong được đặt xuống, không một câu hỏi." },
+      { id: "twist_03", icon: "🌙🤝", location: "TRONG MỘT THÁNG QUA • BẢY CÂU CHUYỆN", title: "Những Ly Nước Quay Ngược Về Phía Chủ Quán",
+        caption: "Mỗi lời Thỏ Con nói với khách, hóa ra cũng là lời tự nói với chính mình.\n\nVy bị từ chối mười hai lần mà vẫn đi tiếp. Minh chọn lên tiếng thay vì im lặng. Chị Linh viết tiếp dù chỉ một trang mỗi đêm. Anh Tuấn gồng gánh vì hai đứa nhỏ. Anh Khang giữ lửa cho mười hai người thợ. Cô Hoa học cách nhờ con giúp đỡ. Bác An tin rằng một hạt giống tử tế sẽ nở hoa.\n\nBảy cuộc đời ấy, không ai hay biết, đã trở thành bảy lý do để Thỏ Con ở lại và tiếp tục điều trị." },
+      { id: "twist_04", icon: "🏥🌅🧣", location: "07:00 • SAU KHI QUÁN ĐÓNG CỬA", title: "Phòng Điều Trị Lúc Bình Minh",
+        caption: "Mỗi sáng, khi vị khách cuối cùng rời đi, Thỏ Con quấn chiếc khăn len hổ phách của cô Hoa, mang theo chú vịt cao su của Minh và cuốn băng của Vy, rồi đến bệnh viện. Có những buổi sáng mệt rã rời, có những ngày nỗi sợ quay lại thì thầm bên tai.\n\nNhưng ở đó, Thỏ Con nhớ tới ánh đèn vàng của quán, tới những người sẽ đẩy cửa bước vào lúc nửa đêm, và tự nhủ: \"Mình vẫn ở đây. Hôm nay mình vẫn chọn ở lại.\"" },
+      { id: "twist_05", icon: "🍵🤍", location: "05:10 • LY THỨ BẢY CÓ TÊN", title: "Ly Thứ Bảy Mang Tên Thỏ Con",
+        caption: "Lần này không phải Thỏ Con pha nước. Bảy người khách cùng đứng sau quầy gỗ: một chén trà hoa cúc mật ong, một lát gừng mỏng, và một lần lắng nghe thật lòng.\n\nMảnh giấy ố vàng của người chủ quán già đã nói đúng: \"Món này không có tên — tên của nó là tên của người đang uống.\" Chiếc ly được đặt trước mặt Thỏ Con." },
+      { id: "twist_06", icon: "🕊️🎗️", location: "LỜI TRI ÂN • GỬI NHỮNG NGƯỜI ĐANG CHIẾN ĐẤU", title: "Gửi Những Người Đã Và Đang Đi Qua Ung Thư",
+        caption: "Trò chơi này xin gửi tới những người đã và đang chiến đấu với ung thư, đặc biệt là những ai từng có lúc kiệt sức, tuyệt vọng, tưởng mình chỉ là gánh nặng. Nỗi sợ ấy là thật, và bạn không có lỗi khi cảm thấy như vậy.\n\nBạn xứng đáng được nâng đỡ. Nếu bạn đang nặng lòng, hãy nói với một người bạn tin tưởng, với bác sĩ hoặc chuyên viên tâm lý, hoặc gọi đường dây hỗ trợ khủng hoảng tại nơi bạn sống. Xin đừng giữ một mình.\n\nVà xin cúi đầu tri ân những người đã không thể ở lại tới sáng: ngọn đèn này cũng được thắp lên vì các bạn." },
+      { id: "twist_07", icon: "🏮🐰🌅", location: "05:30 • NGỌN ĐÈN VẪN SÁNG", title: "Ai Cũng Có Thể Đến — Kể Cả Người Gác Đèn",
+        caption: "Mưa tạnh. Tia nắng đầu tiên chạm vào ô cửa, rọi lên quầy gỗ nơi tám con người ngồi cạnh nhau. Thỏ Con vẫn còn một chặng đường điều trị dài phía trước, nhưng không còn đi một mình.\n\nHóa ra dòng chữ dưới đáy ly năm nào cũng là lời gửi cho chính người giữ đèn: \"Giữ ngọn đèn này sáng không phải vì có ai đến — mà vì ai cũng có thể đến.\" Kể cả bạn." }
     ];
 
     const CUTSCENE_CATALOG = [
@@ -2295,7 +2316,9 @@
         location: "🗝️ KHO BÍ MẬT • BÍ MẬT ĐÃ MỞ",
         title: s.title,
         caption: s.story
-      }))
+      })),
+
+      ...TWIST_CUTSCENES
     ];
 
     const ACHIEVEMENTS = [
@@ -2316,7 +2339,8 @@
       { id: "ach_peace_all", title: "Năm Dấu Ấn Bình Yên", desc: "Khám phá trọn vẹn 5 bí mật ẩn trên sân khấu quán.", titleReward: "Người Giữ Sự Bình Yên" },
       { id: "ach_perfect_brew", title: "Bàn Tay Vàng Quầy Gỗ", desc: "Pha chế đạt chuẩn Hoàn Hảo 3 ly nước qua thử thách quầy bar.", titleReward: "Nghệ Nhân Tinh Hoa" },
       { id: "ach_secret_5", title: "Người Giữ Bí Mật", desc: "Mở khóa 5 bí mật trong Kho Bí Mật.", titleReward: "Người Giữ Bí Mật Quán" },
-      { id: "ach_secret_all", title: "Chìa Khóa Vạn Năng", desc: "Mở khóa toàn bộ bí mật trong Kho Bí Mật.", titleReward: "Người Gác Đêm Vĩnh Cửu" }
+      { id: "ach_secret_all", title: "Chìa Khóa Vạn Năng", desc: "Mở khóa toàn bộ bí mật trong Kho Bí Mật.", titleReward: "Người Gác Đêm Vĩnh Cửu" },
+      { id: "ach_twist", title: "Người Gác Đêm Đã Về", desc: "Lắng nghe câu chuyện thật của Thỏ Con ở Cánh Cửa Thứ Hai.", titleReward: "Chiến Binh Ánh Đèn" }
     ];
 
     const EASTER_EGGS = [
@@ -2467,7 +2491,9 @@
         drinkAlbum: [],
         stickyNotes: [],
         unlockedSecrets: {},
-        clockTapCount: 0
+        clockTapCount: 0,
+        twistEndingSeen: false,
+        twistAnnounced: false
       };
     }
 
@@ -2508,7 +2534,9 @@
         drinkAlbum: Array.isArray(rawObj.drinkAlbum) ? rawObj.drinkAlbum.slice(0, 40) : [],
         stickyNotes: Array.isArray(rawObj.stickyNotes) ? rawObj.stickyNotes.slice(0, 35) : [],
         unlockedSecrets: safeObj(rawObj.unlockedSecrets, {}),
-        clockTapCount: Math.max(0, Number(rawObj.clockTapCount) || 0)
+        clockTapCount: Math.max(0, Number(rawObj.clockTapCount) || 0),
+        twistEndingSeen: Boolean(rawObj.twistEndingSeen),
+        twistAnnounced: Boolean(rawObj.twistAnnounced)
       };
     }
 
@@ -2679,7 +2707,11 @@
       return slot.guests.map((id) => CHARACTERS[id] || CHARACTERS.vy);
     }
 
+    let twistStageMode = null; // null | "alone" | "all"
+
     function getStageVisibleGuests() {
+      if (twistStageMode === "alone") return [];
+      if (twistStageMode === "all") return STANDARD_GUEST_ORDER.map((id) => CHARACTERS[id]);
       const slot = getCurrentNightSlot();
       const guests = getCurrentNightGuests();
       if (slot.type === "duo" && runState && !runState.duoSecondGuestPresent) {
@@ -3594,9 +3626,15 @@
         });
 
         const visibleGuests = getStageVisibleGuests();
+        const crowd = visibleGuests.length > 2;
+        const guestScale = crowd ? portraitScale * 0.72 : portraitScale;
         visibleGuests.forEach((guest, idx) => {
-          const gx = visibleGuests.length === 1 ? w * 0.57 : w * (0.52 + idx * 0.14);
-          this.drawPersonPortrait(ctx, gx, counterY + 2, portraitScale, {
+          const gx = crowd
+            ? w * (0.45 + idx * 0.075)
+            : visibleGuests.length === 1
+            ? w * 0.57
+            : w * (0.52 + idx * 0.14);
+          this.drawPersonPortrait(ctx, gx, counterY + 2, guestScale, {
             hairColor: guest.hairColor,
             outfitColor: guest.outfitColor,
             accessory: guest.accessory,
@@ -3607,10 +3645,10 @@
           this.hitboxes.push({
             id: "guest",
             guest,
-            x: gx - 30 * portraitScale,
-            y: counterY - 72 * portraitScale,
-            w: 60 * portraitScale,
-            h: 74 * portraitScale
+            x: gx - 30 * guestScale,
+            y: counterY - 72 * guestScale,
+            w: 60 * guestScale,
+            h: 74 * guestScale
           });
         });
 
@@ -5496,6 +5534,131 @@
       });
     }
 
+    /* ---- CÁNH CỬA THỨ HAI: TWIST & KẾT CỤC BÍ MẬT ---- */
+    function isTwistUnlocked() {
+      const a = persistentArchive;
+      return (
+        SHIFT_MODES.every((m) => a.completedModes[m.id]) &&
+        SECRET_VAULT.every((s) => a.unlockedSecrets && a.unlockedSecrets[s.id]) &&
+        Object.keys(a.unlockedEndings).length >= 33
+      );
+    }
+
+    function playCutsceneChain(ids, done) {
+      if (!ids.length) {
+        if (done) done();
+        return;
+      }
+      playCutscene(ids[0], () => playCutsceneChain(ids.slice(1), done));
+    }
+
+    const TWIST_BEATS = [
+      { speaker: "Bình Minh Hẻm Nhỏ", role: "05:05 • Cánh Cửa Thứ Hai", avatar: "🌅", text: "Không ai rời quán. Vy, Minh, chị Linh, anh Tuấn, anh Khang, cô Hoa và bác An kéo ghế ngồi quanh quầy gỗ. Tối nay không ai gọi nước. Tối nay, họ đến để nghe." },
+      { speaker: "Vy (22 tuổi)", role: "Phóng Viên Trẻ", avatar: "🎓", text: "Em tắt máy ghi âm rồi. Bao nhiêu đêm Thỏ Con nghe em kể, giờ đến lượt em ngồi nghe. Thỏ Con muốn bắt đầu từ đâu cũng được ạ." },
+      { speaker: "Thỏ Con", role: "Người Gác Đèn", avatar: "🐰", text: "Tờ giấy trên quầy là thật. Bạn sẽ mở lời thế nào?", options: [
+        { label: "❤️ \"Thỏ Con đã sợ lắm. Có đêm, Thỏ Con đã nghĩ biến mất đi thì mọi người sẽ nhẹ nhõm hơn.\"",
+          replies: [{ speaker: "Cô Hoa (44 tuổi)", role: "Người Mẹ", avatar: "🧶", text: "Cảm ơn cháu đã dám nói ra. Nỗi sợ đó không làm cháu yếu đuối, và cháu chưa bao giờ là gánh nặng của ai." }] },
+        { label: "✨ \"Thỏ Con muốn kể từ đầu: từ cuộc gọi chẩn đoán, đến những buổi sáng ở bệnh viện.\"",
+          replies: [{ speaker: "Bác An (68 tuổi)", role: "Cựu Giáo Viên", avatar: "👓", text: "Bác nghe từng chữ. Gọi tên được nỗi đau là một nửa của việc đi qua nó đấy cháu." }] },
+        { label: "🤫 Lặng lẽ đặt tờ giấy hẹn khám lên quầy, chưa nói được lời nào.",
+          replies: [{ speaker: "Anh Khang (38 tuổi)", role: "Nghệ Nhân Đồ Da", avatar: "🧵", text: "Không cần nói gì cả. Anh ngồi đây được rồi." }] }
+      ] },
+      { speaker: "Minh (27 tuổi)", role: "Kỹ Sư AI", avatar: "💻", text: "Tôi chỉ biết debug code, nhưng có một điều tôi học được: khi hệ thống quá tải, việc đầu tiên là báo cho người khác biết, đừng im lặng chịu đựng một mình." },
+      { speaker: "Chị Linh (31 tuổi)", role: "Biên Tập Viên", avatar: "🖋️", text: "Chị vừa viết thêm một chương vào cuốn sổ bìa đỏ. Nhân vật chính của chương đó ở lại." },
+      { speaker: "Anh Tuấn (35 tuổi)", role: "Tài Xế & Thợ Cơ Khí", avatar: "🚚", text: "Xe hỏng thì mình sửa, người mệt thì mình chở nhau. Sáng mai anh chở em tới viện, đừng đi một mình nữa nhé." },
+      { speaker: "Anh Khang (38 tuổi)", role: "Nghệ Nhân Đồ Da", avatar: "🧵", text: "Thẻ da anh khâu cho em dùng để đánh dấu trang đang đọc dở. Em chưa đọc xong đâu. Còn nhiều trang phía trước." },
+      { speaker: "Cô Hoa (44 tuổi)", role: "Người Mẹ", avatar: "🧶", text: "Cô đan thêm cho cháu một chiếc mũ len. Những buổi sáng ở viện sẽ lạnh, nhưng cháu không đi một mình." },
+      { speaker: "Bác An (68 tuổi)", role: "Cựu Giáo Viên", avatar: "👓", text: "Bác chấm bài cả đời. Bài của cháu hôm nay bác cho mười điểm, vì cháu dám nói ra." },
+      { speaker: "Thỏ Con", role: "Lá Bài Thứ 17", avatar: "🃏", text: "Vy lật lá bài trắng cuối hộp DRINK: \"Điều bạn cần nghe nhất lúc này là gì?\"", options: [
+        { label: "❤️ \"Rằng Thỏ Con không phải một mình.\"",
+          replies: [{ speaker: "Bảy Vị Khách", role: "Cùng Nhau", avatar: "🤝", text: "Không một mình. Không bao giờ nữa." }] },
+        { label: "✨ \"Rằng ở lại điều trị là một lựa chọn xứng đáng, và Thỏ Con xứng đáng được chăm sóc.\"",
+          replies: [{ speaker: "Bảy Vị Khách", role: "Cùng Nhau", avatar: "🤝", text: "Xứng đáng. Và bọn mình sẽ cùng đi với bạn." }] },
+        { label: "🤫 \"Chỉ cần ai đó nắm tay Thỏ Con một lúc thôi.\"",
+          replies: [{ speaker: "Bảy Vị Khách", role: "Cùng Nhau", avatar: "🤝", text: "Bảy bàn tay đặt lên bàn tay Thỏ Con. Và họ ở lại đó đến khi trời sáng hẳn." }] }
+      ] }
+    ];
+
+    function runTwistScene(onDone) {
+      twistStageMode = "all";
+      const queue = [...TWIST_BEATS];
+      let idx = 0;
+      const area = document.getElementById("dialogue-action-area");
+      const makeBtn = (label, cls, onClick) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = cls;
+        btn.textContent = label;
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          onClick();
+        });
+        area.appendChild(btn);
+      };
+      const step = () => {
+        area.innerHTML = "";
+        if (idx >= queue.length) {
+          onDone();
+          return;
+        }
+        const b = queue[idx];
+        setDialogue(b.speaker, b.role, b.avatar, b.text, false);
+        document.getElementById("stage-guest-label").textContent = "🐰 Thỏ Con & 7 vị khách";
+        if (b.options) {
+          b.options.forEach((o) =>
+            makeBtn(
+              o.label,
+              "w-full text-left p-3 rounded-2xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-400/35 text-xs sm:text-sm text-stone-100 transition-all cursor-pointer",
+              () => {
+                queue.splice(idx + 1, 0, ...o.replies);
+                idx++;
+                step();
+              }
+            )
+          );
+        } else {
+          makeBtn(
+            "Tiếp ▸",
+            "w-full min-h-[44px] py-2.5 rounded-2xl bg-stone-900/95 hover:bg-amber-500/15 border border-stone-700 text-xs sm:text-sm text-amber-200 cursor-pointer",
+            () => {
+              idx++;
+              step();
+            }
+          );
+        }
+      };
+      step();
+    }
+
+    function finishTwistEnding() {
+      twistStageMode = null;
+      persistentArchive.twistEndingSeen = true;
+      if (!persistentArchive.unlockedAchievements.ach_twist) {
+        persistentArchive.unlockedAchievements.ach_twist = true;
+        showToast("🏆 Mở khóa danh hiệu: Chiến Binh Ánh Đèn!");
+      }
+      saveArchive();
+      updateAllProgressBadges();
+      document.getElementById("dialogue-action-area").innerHTML = "";
+      switchScreen("screen-welcome");
+    }
+
+    function startTwistEnding() {
+      if (!isTwistUnlocked()) {
+        showToast("🔒 Cánh cửa này vẫn chưa mở…");
+        return;
+      }
+      cancelActiveBrewAnimation();
+      closeModal("mobile-drawer");
+      switchScreen("screen-game");
+      twistStageMode = "alone";
+      document.getElementById("dialogue-action-area").innerHTML = "";
+      setDialogue("Thỏ Con", "Chủ Quán Nửa Đêm", "🐰", "Quầy gỗ vắng lặng. Ngọn đèn vàng vẫn sáng, như mọi đêm.", false);
+      playCutsceneChain(["twist_01", "twist_02", "twist_03", "twist_04"], () =>
+        runTwistScene(() => playCutsceneChain(["twist_05", "twist_06", "twist_07"], finishTwistEnding))
+      );
+    }
+
     function isSecretUnlocked(id) {
       return Boolean(persistentArchive.unlockedSecrets && persistentArchive.unlockedSecrets[id]);
     }
@@ -5554,6 +5717,11 @@
 
     function checkAndUnlockAchievements() {
       checkSecrets();
+      if (isTwistUnlocked() && !persistentArchive.twistAnnounced) {
+        persistentArchive.twistAnnounced = true;
+        saveArchive();
+        showToast("🕊️ Một cánh cửa mới vừa hiện ra trong Menu…");
+      }
       const a = persistentArchive;
       const secretsCount = Object.keys(a.unlockedSecrets).length;
       const endingsCount = Object.keys(a.unlockedEndings).length;
@@ -5705,6 +5873,8 @@
       if (secretsBadge) secretsBadge.textContent = `${secretsFound}`;
       const secretsBtn = document.getElementById("btn-drawer-secrets");
       if (secretsBtn) secretsBtn.classList.toggle("hidden", secretsFound === 0);
+      const twistBtn = document.getElementById("btn-twist-ending");
+      if (twistBtn) twistBtn.classList.toggle("hidden", !isTwistUnlocked());
     }
 
     function openCutsceneGallery() {
@@ -5912,6 +6082,7 @@
             <span class="text-emerald-300 font-semibold">Tầng 3 (Hậu Truyện 6 Tháng):</span>
             <span class="text-stone-300">${t3 ? d.tier3 : "🔒 ???"}</span>
           </div>
+          ${d.id === "thocon" && persistentArchive.twistEndingSeen ? `<div class="p-2 rounded-xl bg-rose-500/10 border border-rose-400/35"><span class="text-rose-300 font-semibold">Tầng 4 (Điều Chưa Kể):</span> <span class="text-stone-200">${d.tier4}</span></div>` : ""}
         `;
         grid.appendChild(card);
       });
@@ -6451,6 +6622,7 @@
       });
 
       document.getElementById("btn-night8-secret").addEventListener("click", startSecretNight8Reunion);
+      document.getElementById("btn-twist-ending").addEventListener("click", startTwistEnding);
       document.getElementById("btn-restart-run").addEventListener("click", () => {
         cancelActiveBrewAnimation();
         closeModal("mobile-drawer");
