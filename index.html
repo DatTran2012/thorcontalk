@@ -2211,18 +2211,92 @@
       },
       {
         id: "secret_perfect", icon: "🤲🌟", title: "Bàn Tay Vàng Của Thỏ Con",
-        hint: "Pha chế đạt chuẩn Hoàn Hảo 10 ly nước.",
+        hint: "Pha chế đạt chuẩn Hoàn Hảo 8 ly nước.",
         reward: "🥂 Ly nước trên quầy có viền vàng lấp lánh",
-        story: "Mười ly hoàn hảo — nhưng khách nhớ mãi không phải vị nước, mà là cảm giác được pha riêng cho mình. Bí quyết của người chủ quán già hóa ra đơn giản: “Pha bằng đôi tay, nhưng rót bằng cả tấm lòng.” Chiếc ly trên quầy bắt đầu ánh lên một viền vàng nhỏ."
+        story: "Tám ly hoàn hảo — nhưng khách nhớ mãi không phải vị nước, mà là cảm giác được pha riêng cho mình. Bí quyết của người chủ quán già hóa ra đơn giản: “Pha bằng đôi tay, nhưng rót bằng cả tấm lòng.” Chiếc ly trên quầy bắt đầu ánh lên một viền vàng nhỏ."
       },
       {
         id: "secret_master", icon: "🚪🌅", title: "Cánh Cửa Thứ Hai",
-        hint: "Chỉ người nào lật mở mọi bí mật còn lại và hội ngộ đủ 7 vị khách mới thấy.",
+        hint: "Mở mọi bí mật còn lại, rồi vào «🌅 Đêm Hội Ngộ» trong Menu và bấm nút tiếp tục ở cuối đêm hội ngộ.",
         reward: "👑 Ngôi sao vàng lấp lánh trên đầu Thỏ Con",
         hiddenProgress: true,
         story: "Khi mọi bí mật đã được kể, phía sau quầy gỗ hiện ra một cánh cửa nhỏ chưa từng có. Thỏ Con đẩy nhẹ: bên kia là con hẻm sáng nắng, và ở đầu hẻm, người chủ quán già đang đứng mỉm cười, gật đầu như muốn nói: “Cháu đã giữ đèn thay ta rất tốt.” Ngọn đèn vàng của Tiệm Nước Nửa Đêm sẽ sáng mãi."
       }
     ];
+
+    /* ---- CUTSCENE NGẮN CHO TỪNG KẾT CỤC (3 trang: khoảnh khắc ra về → hậu truyện → bản tin radio) ---- */
+    const SOLO_ENDING_SCENES = {
+      vy: {
+        heart: "Sáng hôm sau, Vy không nộp thêm hồ sơ nào nữa. Cô đeo máy ghi âm, đi bộ ra bến xe buýt đầu tiên, ngồi xuống cạnh một bác tài gác đêm và hỏi: \"Bác kể cháu nghe một đêm làm việc của bác được không ạ?\"",
+        mind: "Trong phòng trọ, Vy mở bảng dữ liệu và gạch đầu dòng kế hoạch cho kênh phóng sự độc lập: tên kênh, mười nhân vật đầu tiên, lịch đăng mỗi tuần. Tối đó cô đăng tập đầu tiên, và con số lượt xem nhỏ xíu khiến cô cười đến rưng rưng.",
+        silent: "Vy bước ra hẻm mà chưa vội viết gì. Cô bật máy ghi âm chỉ để thu tiếng mưa tạnh dần trên mái tôn, rồi lặng lẽ nghe lại chính tiếng ấy suốt quãng đường về."
+      },
+      minh: {
+        heart: "Trên chuyến xe buýt sớm, Minh mở máy phác thảo giao diện một ứng dụng nhỏ: nơi các quán ăn đăng suất cơm dư mỗi tối. Lần đầu sau nhiều tháng, anh quên kiểm tra email.",
+        mind: "Minh vào văn phòng sớm hơn mọi ngày và viết lên bảng trắng một dòng chữ to: \"Công cụ phải nâng đỡ con người trước.\" Rồi anh bắt đầu vẽ lại cả sơ đồ hệ thống.",
+        silent: "Minh tháo kính, lau thật chậm bằng vạt áo rồi đeo lại. Anh bước ra phố trong im lặng, đôi vai đã hạ xuống một nấc, và điện thoại nằm yên trong túi suốt cả đoạn đường."
+      },
+      linh: {
+        heart: "Trên chuyến xe điện đầu ngày, chị Linh mở cuốn sổ bìa đỏ, viết dòng đầu cho chương mới: \"Có những người thức khuya chỉ để giữ cho thành phố bớt lạnh.\" Ngòi bút lần này không còn run.",
+        mind: "Chị Linh soạn một email dài gửi nhà xuất bản độc lập, đính kèm ba chương bản thảo. Trước khi bấm gửi, chị khẽ đọc to lời giới thiệu như đọc cho một người bạn nghe.",
+        silent: "Chị Linh khép cuốn sổ, ôm nó vào lòng rồi đi chậm dọc con hẻm. Chị không viết gì cả, chỉ để từng bước chân tự tìm lại nhịp của câu văn."
+      },
+      tuan: {
+        heart: "Anh Tuấn chạy nốt chuyến cuối rồi ghé mua hai phần xôi nóng. Về tới đầu ngõ, hai đứa nhỏ đã đứng chờ, reo to: \"Bố về rồi!\", và cả đêm mệt nhọc tan đi trong một cái ôm.",
+        mind: "Giao ca xong, anh Tuấn không về nhà ngay. Anh lau tay, cầm xấp hồ sơ, đi thẳng tới xưởng bảo trì xe điện và gõ cửa phòng tuyển dụng.",
+        silent: "Anh Tuấn ngồi thêm một lúc bên ấm nước nguội dần rồi gật đầu với chính mình. Anh đội mũ, bước ra đường, và tiếng động cơ lần này nghe êm hơn hẳn."
+      },
+      khang: {
+        heart: "Về tới xưởng, anh Khang bật đèn trước khi các anh em đến. Anh trải một tấm da sáp ong lên bàn, đặt từng mũi kim, và khi mười hai người thợ bước vào, mùi sáp ong đã thơm khắp gian xưởng.",
+        mind: "Anh Khang cầm phấn, viết lên bảng đen của xưởng một lịch mới: thứ Hai đến thứ Sáu chế tác, cuối tuần mở cửa đón khách trải nghiệm. Các anh em đọc xong, ai cũng gật đầu.",
+        silent: "Anh Khang ngồi bên bàn gỗ, mân mê chiếc thẻ da nhỏ trong tay mà không nói gì. Ánh sáng đầu ngày chạm lên đôi bàn tay chai sần, và anh thấy lòng yên."
+      },
+      hoa: {
+        heart: "Cô Hoa đi chợ sớm, mua đúng món con trai thích. Khi cậu bước ra khỏi phòng với mái tóc rối, cô chỉ hỏi: \"Hôm nay con ăn có ngon không?\", và hai mẹ con cùng bật cười.",
+        mind: "Tối hôm đó, cô Hoa ngồi cạnh con trai, mở chiếc bảng tính mới. Cậu chỉ từng ô, từng công thức, còn cô ghi chép cẩn thận như một học trò chăm chỉ.",
+        silent: "Cô Hoa quấn chiếc khăn len lên vai, ngồi lặng bên cửa sổ nhìn trời sáng dần. Lần đầu sau nhiều tuần, cô ngủ một giấc thật sâu."
+      },
+      an: {
+        heart: "Bác An đứng trước một buổi giao lưu thơ đông kín người. Bác cất giọng đọc, những gương mặt trẻ lặng đi, rồi tiếng vỗ tay vang lên.",
+        mind: "Bác An bê chiếc thùng sách đầu tiên tới quán, xếp lên kệ gỗ bên cửa sổ. Trên gáy mỗi cuốn, bác dán một nhãn mực tím: \"Mượn miễn phí, trả lúc nào cũng được.\"",
+        silent: "Bác An ngồi bên cửa sổ quán thêm một lúc, nhẩm lại một bài thơ cũ. Giọng đọc rất khẽ, chỉ đủ cho chú mèo tam thể nghe."
+      }
+    };
+
+    const DUO_ENDING_SCENES = {
+      vy_an: {
+        heart: "Chiều hôm sau, Vy tới hiệu sách cũ trước giờ đóng cửa. Bác An pha trà, lật từng lá thư của học trò xưa, còn Vy bật máy ghi âm, nghe say sưa cho tới khi nắng tắt.",
+        mind: "Hai người trải tấm bản đồ khu phố lên bàn: mỗi chấm đỏ là một người cần được ghi lại. Vy đánh số, bác An đặt tên, và \"Ký Ức Hẻm Nhỏ\" bắt đầu từ chiếc bàn ấy."
+      },
+      minh_hoa: {
+        heart: "Cuối tuần, Minh mua vé xe về quê thăm mẹ. Cùng lúc đó, cô Hoa gõ cửa phòng con trai, mang theo đĩa trái cây, và lần này cậu mở cửa.",
+        mind: "Cô Hoa ngồi trước máy tính, Minh chỉ cho cô vài phím tắt. Cô ghi vào sổ từng bước, rồi cả hai hẹn nhau mở một lớp nhỏ cho các cô chú cùng tuổi."
+      },
+      linh_khang: {
+        heart: "Anh Khang cắt một tấm da mềm, chị Linh chọn trang giấy đầu tiên. Hai món thủ công đặt cạnh nhau trên bàn gỗ, và một cuốn sổ bọc da sáp ong dần thành hình.",
+        mind: "Hai người ngồi vạch kế hoạch cho bộ sưu tập: ngày ra mắt, số lượng giới hạn, câu chuyện của từng người thợ. Mỗi dòng viết xong, anh Khang lại gõ nhẹ lên bàn như đóng một mũi chỉ."
+      },
+      tuan_minh: {
+        heart: "Hôm sau, Minh ngồi sau xe anh Tuấn trong một chuyến giao hàng ngắn, nhìn qua vai anh những con đường ngập mưa. Hai người không nói nhiều, nhưng Minh hiểu nhiều hơn cả ngàn dòng báo cáo.",
+        mind: "Minh mở màn hình, nhập vào hệ thống một dòng mới: \"Điều chỉnh thời gian khi mưa ngập.\" Anh Tuấn đứng sau lưng, gật gù: \"Đấy, đúng chỗ đó!\""
+      },
+      tuan_hoa: {
+        heart: "Anh Tuấn và cô Hoa chia tay nhau ở đầu ngõ, mỗi người một hướng về nhà. Cả hai cùng ngoái lại vẫy tay, như hai người hàng xóm quen nhau từ lâu.",
+        mind: "Anh Tuấn đưa cô Hoa tờ thông tin về lớp bổ túc kỹ thuật, cô Hoa ghi lại địa chỉ một khóa học số. Hai người đổi số điện thoại, hẹn nhắn nhau khi có kết quả."
+      },
+      linh_an: {
+        heart: "Bác An viết lên trang đầu một cuốn sổ trắng: \"Tặng cô học trò của cuộc đời.\" Chị Linh đón lấy, không nói được lời nào, chỉ cúi đầu thật sâu.",
+        mind: "Hai người chọn ra mười cuốn sách đầu tiên cho câu lạc bộ đọc chậm, mỗi cuốn kẹp một tờ giấy câu hỏi. Chị Linh viết, bác An đọc lại, và tờ nào cũng có một nét mực tím."
+      }
+    };
+
+    function buildEndingPages(icon, scene, summary, radioNews) {
+      return [
+        { icon, text: scene },
+        { icon: "🌤️", text: summary },
+        { icon: "📻", text: `Đài FM Nửa Đêm: ${radioNews}` }
+      ];
+    }
 
     const TWIST_CUTSCENES = [
       { id: "twist_01", icon: "🐱📄🕊️", location: "CÁNH CỬA THỨ HAI • 05:00", title: "Tờ Giấy Hẹn Khám Dưới Chiếc Khăn Len",
@@ -2277,7 +2351,13 @@
           icon: `${ch.avatar}${bKey === "heart" ? "❤️" : bKey === "mind" ? "✨" : "🤫"}`,
           location: `KẾT CỤC • ${ch.name.toUpperCase()}`,
           title: branches[bKey].title,
-          caption: branches[bKey].summary
+          caption: branches[bKey].summary,
+          pages: buildEndingPages(
+            `${ch.avatar}${bKey === "heart" ? "❤️" : bKey === "mind" ? "✨" : "🤫"}`,
+            SOLO_ENDING_SCENES[gid][bKey],
+            branches[bKey].summary,
+            branches[bKey].radioNews
+          )
         }));
       }),
 
@@ -2290,14 +2370,16 @@
             icon: `${g1.avatar}🤝${g2.avatar}`,
             location: `GIAO THOA TRÁI TIM • ${g1.name.split(" (")[0].toUpperCase()} & ${g2.name.split(" (")[0].toUpperCase()}`,
             title: duo.endings.heart.title,
-            caption: duo.endings.heart.summary
+            caption: duo.endings.heart.summary,
+            pages: buildEndingPages(`${g1.avatar}🤝${g2.avatar}`, DUO_ENDING_SCENES[duo.id].heart, duo.endings.heart.summary, duo.endings.heart.radioNews)
           },
           {
             id: `duo_${duo.id}_mind`,
             icon: `${g1.avatar}🚀${g2.avatar}`,
             location: `LIÊN MINH SÁNG TẠO • ${g1.name.split(" (")[0].toUpperCase()} & ${g2.name.split(" (")[0].toUpperCase()}`,
             title: duo.endings.mind.title,
-            caption: duo.endings.mind.summary
+            caption: duo.endings.mind.summary,
+            pages: buildEndingPages(`${g1.avatar}🚀${g2.avatar}`, DUO_ENDING_SCENES[duo.id].mind, duo.endings.mind.summary, duo.endings.mind.radioNews)
           }
         ];
       }),
@@ -4068,6 +4150,7 @@
     }
 
     let activeCutsceneCallback = null;
+    let activeCutscenePages = null; // { pages, idx, location }
 
     function playCutscene(cutsceneId, onDone = null, nightMeta = null) {
       const cs = CUTSCENE_CATALOG.find((c) => c.id === cutsceneId);
@@ -4090,12 +4173,30 @@
           nightBannerEl.classList.add("hidden");
         }
       }
-      document.getElementById("cs-player-icon").textContent = cs.icon;
       document.getElementById("cs-player-title").textContent = cs.title;
-      document.getElementById("cs-player-caption").textContent = cs.caption;
+      if (Array.isArray(cs.pages) && cs.pages.length > 0) {
+        activeCutscenePages = { pages: cs.pages, idx: 0, location: cs.location };
+        renderCutscenePage();
+      } else {
+        activeCutscenePages = null;
+        document.getElementById("cs-player-icon").textContent = cs.icon;
+        document.getElementById("cs-player-caption").textContent = cs.caption;
+        document.getElementById("btn-cs-player-continue").textContent = "Tiếp Tục ▸";
+      }
       activeCutsceneCallback = onDone;
       audioEngine.playChime(440, 0.4, 0.04);
       openModal("modal-cutscene-player");
+    }
+
+    function renderCutscenePage() {
+      const st = activeCutscenePages;
+      if (!st) return;
+      const page = st.pages[st.idx];
+      const isLast = st.idx >= st.pages.length - 1;
+      document.getElementById("cs-player-location").textContent = `${st.location} • ${st.idx + 1}/${st.pages.length}`;
+      document.getElementById("cs-player-icon").textContent = page.icon;
+      document.getElementById("cs-player-caption").textContent = page.text;
+      document.getElementById("btn-cs-player-continue").textContent = isLast ? "Tiếp Tục ▸" : "Tiếp ▸";
     }
 
     function playOriginSequence(onComplete) {
@@ -4545,6 +4646,20 @@
     /* -----------------------------------------------------------------------
        SECTION 8: 3-STEP BREWING STATION & MINI-GAMES
     ------------------------------------------------------------------------ */
+    /* Thông số độ khó của minigame pha chế: chỉnh tại đây. Vị trí tính theo % thanh. */
+    const BREW_TUNING = {
+      shaker: { taps: 6, minGapMs: 120, breakGapMs: 900, steadyMinMs: 180, steadyMaxMs: 550 },
+      drip: { speed: 125, perfect: [43, 57], ok: [30, 70] },
+      ember: { rate: 70, start: 12, minHold: 25, perfect: [60, 85], okLow: 45, okHigh: 95 },
+      quality: { perfectAffinity: 4, goodAffinity: 2.5, lenientAffinity: 1.5, carryAffinity: 5 }
+    };
+    const inRange = (v, [lo, hi]) => v >= lo && v <= hi;
+
+    function lockChallengeButton(btn) {
+      btn.disabled = true;
+      btn.classList.add("opacity-70", "cursor-default");
+    }
+
     function renderThreeStepBrewingStation(guests) {
       const actionArea = document.getElementById("dialogue-action-area");
       actionArea.innerHTML = "";
@@ -4563,11 +4678,15 @@
 
         const header = document.createElement("div");
         header.className = "flex flex-wrap items-center justify-between gap-2 text-xs border-b border-stone-800 pb-2";
+        const needsLabel = [...new Set(guests.map((g) => g.needEmotion))]
+          .map((k) => `${EMOTION_TAGS[k].icon} ${EMOTION_TAGS[k].label}`)
+          .join(" • ");
         header.innerHTML = `
           <span class="font-bold text-amber-200">🍹 Quầy Pha Chế 3 Công Đoạn — Bước ${step}/3</span>
           <span class="text-[11px] font-mono-code text-stone-400">
             ${step === 1 ? "Chọn Cốt Nước" : step === 2 ? "Phối 1–2 Thảo Mộc" : "Thao Tác Pha Chế"}
           </span>
+          <span class="w-full text-[11px] text-amber-300/90">💡 Khách đang cần cảm xúc: ${needsLabel} — chọn cốt và hương vị cùng sắc thái, hợp khẩu vị khách để đạt Hoàn Hảo.</span>
         `;
         wrap.appendChild(header);
 
@@ -4730,41 +4849,61 @@
           cancelActiveBrewAnimation();
           challengeBonus = bonus;
           challengeResultText = labelText;
+          const tone = bonus === 2 ? "emerald" : bonus === 1 ? "amber" : "rose";
           statusPill.textContent = labelText;
-          statusPill.className = "text-[11px] font-mono-code text-emerald-300 font-bold";
-          body.className = "space-y-2.5 p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-400/40 transition-all";
+          statusPill.className = `text-[11px] font-mono-code text-${tone}-300 font-bold`;
+          body.className = `space-y-2.5 p-2.5 rounded-xl bg-${tone}-500/10 border border-${tone}-400/40 transition-all`;
           unlockServeButton();
-          audioEngine.playChime(bonus === 2 ? 659.25 : 523.25, 0.3, 0.05);
+          audioEngine.playChime(bonus === 2 ? 659.25 : bonus === 1 ? 523.25 : 261.6, 0.3, 0.05);
         };
 
         if (challengeType === "shaker") {
           let shakes = 0;
+          let lastTap = 0;
+          const gaps = [];
           body.innerHTML = `
-            <p class="text-xs text-stone-300">Chạm nhanh <strong>5 lần</strong> vào bình lắc Boston để làm lạnh đều ${selectedBase.name}!</p>
+            <p class="text-xs text-stone-300">Chạm <strong>6 nhịp đều tay</strong> vào bình lắc Boston, mỗi nhịp cách nhau khoảng nửa giây (không quá nhanh, không quá chậm). Dừng quá lâu thì phải lắc lại từ đầu!</p>
             <div class="flex items-center gap-3">
               <button type="button" id="btn-challenge-shake" class="no-touch-select min-h-[52px] px-5 py-3 rounded-2xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/50 text-sky-100 font-bold text-sm cursor-pointer">
-                🍸 Lắc Bình (<span id="shake-count">0</span>/5)
+                🍸 Lắc Bình (<span id="shake-count">0</span>/6)
               </button>
               <div class="flex-1 h-3 rounded-full bg-stone-950 border border-stone-800 overflow-hidden">
                 <div id="shake-bar" class="h-full bg-sky-400 transition-all" style="width: 0%"></div>
               </div>
             </div>
+            <div id="shake-feedback" class="text-[11px] text-sky-200 min-h-[16px]"></div>
           `;
           const btnShake = document.getElementById("btn-challenge-shake");
           btnShake.addEventListener("click", (e) => {
             e.stopPropagation();
             if (challengeFinished) return;
+            const now = performance.now();
+            const fb = document.getElementById("shake-feedback");
+            if (shakes > 0) {
+              const gap = now - lastTap;
+              if (gap < BREW_TUNING.shaker.minGapMs) return; // chống bấm dồn
+              if (gap > BREW_TUNING.shaker.breakGapMs) {
+                shakes = 0;
+                gaps.length = 0;
+                fb.textContent = "⏱️ Nhịp bị đứt, lắc lại từ đầu nhé!";
+              } else {
+                gaps.push(gap);
+                fb.textContent = gap < BREW_TUNING.shaker.steadyMinMs ? "⚡ Hơi gấp!" : gap > BREW_TUNING.shaker.steadyMaxMs ? "🐢 Hơi chậm!" : "👌 Đều tay!";
+              }
+            }
+            lastTap = now;
             shakes++;
             btnShake.classList.remove("brew-shake-anim");
             void btnShake.offsetWidth;
             btnShake.classList.add("brew-shake-anim");
-            audioEngine.playChime(350 + shakes * 60, 0.12, 0.04);
-            document.getElementById("shake-count").textContent = Math.min(5, shakes);
-            document.getElementById("shake-bar").style.width = `${Math.min(100, shakes * 20)}%`;
-            if (shakes >= 5) {
-              btnShake.disabled = true;
-              btnShake.classList.add("opacity-70", "cursor-default");
-              markChallengeResult(2, "🌟 Lắc chuẩn bọt mịn Hoàn Hảo!");
+            audioEngine.playChime(350 + shakes * 50, 0.12, 0.04);
+            document.getElementById("shake-count").textContent = Math.min(6, shakes);
+            document.getElementById("shake-bar").style.width = `${Math.min(100, (shakes / 6) * 100)}%`;
+            if (shakes >= BREW_TUNING.shaker.taps) {
+              lockChallengeButton(btnShake);
+              const steady = gaps.length > 0 && gaps.every((g) => inRange(g, [BREW_TUNING.shaker.steadyMinMs, BREW_TUNING.shaker.steadyMaxMs]));
+              if (steady) markChallengeResult(2, "🌟 Lắc đều nhịp, bọt mịn Hoàn Hảo!");
+              else markChallengeResult(1, "✨ Đã lắc xong, nhưng nhịp chưa thật đều nên bọt hơi thô.");
             }
           });
         } else if (challengeType === "drip") {
@@ -4772,9 +4911,9 @@
           let dir = 1;
           let lastTime = performance.now();
           body.innerHTML = `
-            <p class="text-xs text-stone-300">Canh giọt cà phê phin rơi đúng <strong>vùng vàng ở giữa</strong> rồi bấm <em>Chốt Giọt Tinh Túy</em>!</p>
+            <p class="text-xs text-stone-300">Canh kim rơi đúng <strong>vùng vàng đậm ở chính giữa</strong> rồi bấm <em>Chốt Giọt Tinh Túy</em>. Vùng nhạt bên ngoài chỉ đạt Chuẩn Vị, trượt ra ngoài là hỏng vị!</p>
             <div class="relative h-6 rounded-full bg-stone-950 border border-stone-700 overflow-hidden">
-              <div class="absolute inset-y-0 left-[35%] right-[35%] bg-amber-500/35 border-x border-amber-400"></div>
+              <div class="absolute inset-y-0 left-[30%] right-[30%] bg-amber-500/15"></div><div class="absolute inset-y-0 left-[43%] right-[43%] bg-amber-500/45 border-x border-amber-400"></div>
               <div id="drip-needle" class="absolute top-0 bottom-0 w-2 bg-amber-300 rounded-full shadow" style="left: 10%"></div>
             </div>
             <button type="button" id="btn-challenge-drip" class="min-h-[44px] px-4 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/50 text-amber-200 font-semibold text-xs cursor-pointer">
@@ -4790,7 +4929,7 @@
             }
             const dt = Math.min(0.05, (now - lastTime) / 1000);
             lastTime = now;
-            pos += dir * 82 * dt;
+            pos += dir * BREW_TUNING.drip.speed * dt;
             if (pos >= 92) {
               pos = 92;
               dir = -1;
@@ -4806,20 +4945,21 @@
           btnDrip.addEventListener("click", (e) => {
             e.stopPropagation();
             if (challengeFinished) return;
-            btnDrip.disabled = true;
-            btnDrip.classList.add("opacity-70", "cursor-default");
-            if (pos >= 35 && pos <= 65) {
+            lockChallengeButton(btnDrip);
+            if (inRange(pos, BREW_TUNING.drip.perfect)) {
               markChallengeResult(2, "🌟 Tuyệt vời! Giọt chiết xuất đạt độ cân bằng Hoàn Hảo!");
+            } else if (inRange(pos, BREW_TUNING.drip.ok)) {
+              markChallengeResult(1, "✨ Đã chiết xuất xong, hương vị khá ổn nhưng chưa cân bằng hẳn.");
             } else {
-              markChallengeResult(1, "✨ Đã chiết xuất xong! Hương vị đậm đà Chuẩn Vị.");
+              markChallengeResult(0, "💧 Giọt rơi lệch nhịp, vị cà phê hơi gắt.");
             }
           });
         } else if (challengeType === "ember") {
-          let heat = 12;
+          let heat = BREW_TUNING.ember.start;
           let holding = false;
           let lastTime = performance.now();
           body.innerHTML = `
-            <p class="text-xs text-stone-300">Nhấn giữ nút <strong>Ủ Ấm Trên Bếp Than</strong> đến vùng cam ấm (60%–85%) rồi thả tay!</p>
+            <p class="text-xs text-stone-300">Nhấn giữ nút <strong>Ủ Ấm Trên Bếp Than</strong> đến đúng vùng cam ấm (60%–85%) rồi thả tay. Thả sớm thì nhạt, giữ quá tay thì cháy khét!</p>
             <div class="relative h-6 rounded-full bg-stone-950 border border-stone-700 overflow-hidden">
               <div class="absolute inset-y-0 left-[60%] right-[15%] bg-orange-500/35 border-x border-orange-400"></div>
               <div id="ember-fill" class="h-full bg-gradient-to-r from-amber-500 to-orange-500" style="width: 12%"></div>
@@ -4839,13 +4979,12 @@
             const dt = Math.min(0.05, (now - lastTime) / 1000);
             lastTime = now;
             if (holding) {
-              heat = Math.min(100, heat + 75 * dt);
+              heat = Math.min(100, heat + BREW_TUNING.ember.rate * dt);
               fill.style.width = `${heat}%`;
               if (heat >= 100) {
                 holding = false;
-                btnEmber.disabled = true;
-                btnEmber.classList.add("opacity-70", "cursor-default");
-                markChallengeResult(1, "🔥 Hơi nóng quá tay một chút nhưng vẫn giữ trọn hương thơm!");
+                lockChallengeButton(btnEmber);
+                markChallengeResult(0, "🔥 Than quá nóng, ly nước bị khét mất rồi!");
                 return;
               }
             }
@@ -4861,20 +5000,23 @@
             e.stopPropagation();
             if (!holding || challengeFinished) return;
             holding = false;
-            if (heat < 25) {
-              heat = 12;
+            if (heat < BREW_TUNING.ember.minHold) {
+              heat = BREW_TUNING.ember.start;
               const fill = document.getElementById("ember-fill");
               if (fill) fill.style.width = "12%";
               audioEngine.playChime(240, 0.16, 0.03);
               showToast("⚠️ Bạn giữ chưa đủ lâu để làm ấm ly nước, hãy nhấn giữ thêm nhé!");
               return;
             }
-            btnEmber.disabled = true;
-            btnEmber.classList.add("opacity-70", "cursor-default");
-            if (heat >= 58 && heat <= 86) {
+            lockChallengeButton(btnEmber);
+            if (inRange(heat, BREW_TUNING.ember.perfect)) {
               markChallengeResult(2, "🌟 Nhiệt độ than hồng đạt mức Hoàn Hảo!");
+            } else if (heat >= BREW_TUNING.ember.okLow && heat < BREW_TUNING.ember.perfect[0]) {
+              markChallengeResult(1, "✨ Ly nước ấm vừa, hơi thiếu độ nồng.");
+            } else if (heat > BREW_TUNING.ember.perfect[1] && heat < BREW_TUNING.ember.okHigh) {
+              markChallengeResult(1, "✨ Hơi nóng tay một chút nhưng vẫn giữ được hương.");
             } else {
-              markChallengeResult(1, "✨ Đã ủ ấm thành công! Ly nước tỏa hương dịu nhẹ.");
+              markChallengeResult(0, heat < BREW_TUNING.ember.okLow ? "🧊 Ly nước còn nhạt, chưa kịp ấm." : "🔥 Than quá nóng, ly nước hơi khét.");
             }
           };
 
@@ -4886,9 +5028,17 @@
           btnEmber.addEventListener("touchcancel", endHold);
         } else {
           const pickedAccs = selectedAccents.map((id) => DRINK_ACCENTS.find((a) => a.id === id)).filter(Boolean);
-          const garnishChoices = pickedAccs.length > 0 ? pickedAccs : [DRINK_ACCENTS[0], DRINK_ACCENTS[1]];
+          const decoys = DRINK_ACCENTS.filter((a) => !selectedAccents.includes(a.id));
+          const decoy = decoys[Math.floor(Math.random() * decoys.length)];
+          const garnishChoices = [...pickedAccs, ...(decoy ? [decoy] : [])].sort(() => Math.random() - 0.5);
+          const fitScore = (acc) =>
+            guests.reduce(
+              (s, g) => s + (g.preferredAccents.includes(acc.id) ? 1 : 0) + (acc.emotion === g.needEmotion ? 1 : 0),
+              0
+            );
+          const bestFit = Math.max(...garnishChoices.map(fitScore));
           body.innerHTML = `
-            <p class="text-xs text-stone-300">Chọn điểm nhấn trang trí cuối cùng trên miệng ly để khóa trọn hương thơm:</p>
+            <p class="text-xs text-stone-300">Chọn <strong>một</strong> điểm nhấn trang trí hợp nhất với khách (nhìn lại gợi ý cảm xúc ở trên). Chọn lệch thì ly nước mất đi nét tinh tế:</p>
             <div id="garnish-btns" class="flex flex-wrap gap-2"></div>
           `;
           const gBox = document.getElementById("garnish-btns");
@@ -4905,7 +5055,10 @@
                 if (b !== btn) b.classList.add("opacity-45", "cursor-default");
               });
               btn.className = "min-h-[44px] px-4 py-2 rounded-xl bg-emerald-500/35 border-2 border-emerald-300 text-emerald-100 font-bold text-xs cursor-default";
-              markChallengeResult(2, `🌟 Đã điểm ${g.name} tinh tế Hoàn Hảo!`);
+              const fit = fitScore(g);
+              if (fit >= bestFit && fit > 0) markChallengeResult(2, `🌟 Điểm ${g.name} đúng ý khách, Hoàn Hảo!`);
+              else if (fit > 0) markChallengeResult(1, `✨ Điểm ${g.name} cũng ổn, nhưng còn lựa chọn hợp hơn.`);
+              else markChallengeResult(0, `🌿 ${g.name} chưa hợp tâm trạng khách đêm nay.`);
             });
             gBox.appendChild(btn);
           });
@@ -4971,12 +5124,13 @@
 
       const affinityAvg = (matchScore - challengeBonus) / guests.length;
       let quality = "☕ Mộc Mạc";
-      if ((affinityAvg >= 4 && challengeBonus === 2) || affinityAvg >= 6) {
+      const Q = BREW_TUNING.quality;
+      if (challengeBonus === 2 && affinityAvg >= Q.perfectAffinity) {
         quality = "🌟 Hoàn Hảo";
         runState.trust += 1;
         runState.clarity += 1;
         persistentArchive.perfectBrewsCount = (persistentArchive.perfectBrewsCount || 0) + 1;
-      } else if (affinityAvg >= 2 || (affinityAvg >= 1 && challengeBonus === 2)) {
+      } else if ((affinityAvg >= Q.goodAffinity && challengeBonus >= 1) || (affinityAvg >= Q.lenientAffinity && challengeBonus === 2) || affinityAvg >= Q.carryAffinity) {
         quality = "✨ Chuẩn Vị";
         runState.trust += 1;
       }
@@ -5385,6 +5539,8 @@
           runState.monthCounted = true;
           persistentArchive.playthroughCount = (persistentArchive.playthroughCount || 0) + 1;
           persistentArchive.completedModes[runState.shiftMode] = true;
+          const nextMode = SHIFT_MODES.find((m) => !persistentArchive.completedModes[m.id] && isShiftModeUnlocked(m.id));
+          if (nextMode) persistentArchive.selectedShiftMode = nextMode.id;
           saveArchive();
           saveRunState();
         }
@@ -5475,6 +5631,8 @@
       document.getElementById("cs-player-icon").textContent = "🐰📖☕";
       document.getElementById("cs-player-title").textContent = `Ghi Chép Đầu Tuần ${nextWeekNum}`;
       document.getElementById("cs-player-caption").textContent = recapCaption;
+      activeCutscenePages = null;
+      document.getElementById("btn-cs-player-continue").textContent = "Tiếp Tục ▸";
 
       activeCutsceneCallback = () => {
         startNight(runState.nightIndex);
@@ -5683,7 +5841,7 @@
         case "secret_seasons":
           return [SEASON_THEMES.filter((s) => a.visitedSeasons[s.id]).length, SEASON_THEMES.length];
         case "secret_perfect":
-          return [Math.min(10, a.perfectBrewsCount || 0), 10];
+          return [Math.min(8, a.perfectBrewsCount || 0), 8];
         case "secret_master": {
           const others = SECRET_VAULT.filter((s) => s.id !== "secret_master" && a.unlockedSecrets[s.id]).length;
           return [others + (a.unlockedAchievements.ach_night_8 ? 1 : 0), SECRET_VAULT.length];
@@ -5921,9 +6079,19 @@
         `;
         sigGrid.appendChild(card);
       });
-      if (foundSigs.length === 0) {
-        sigGrid.innerHTML = `<div class="text-xs text-stone-400 sm:col-span-2">Quán chưa có công thức bí truyền nào được ghi lại… Có lẽ chúng sẽ tự lộ ra khi bạn pha đúng một sự kết hợp đặc biệt.</div>`;
-      }
+      SIGNATURE_RECIPES.filter((sig) => !persistentArchive.unlockedSignatures[sig.id]).forEach((sig) => {
+        const base = DRINK_BASES.find((b) => b.id === sig.base);
+        const first = DRINK_ACCENTS.find((a) => a.id === sig.accents[0]);
+        const second = DRINK_ACCENTS.find((a) => a.id === sig.accents[1]);
+        const em = EMOTION_TAGS[second.emotion];
+        const card = document.createElement("div");
+        card.className = "p-3 rounded-2xl border bg-stone-950/80 border-stone-800";
+        card.innerHTML = `
+          <div class="font-bold text-xs text-stone-400">🔒 Công thức chưa lộ diện</div>
+          <div class="text-[11px] text-stone-300 mt-1">💡 Gợi ý: ${base.icon} ${base.name} + ${first.icon} ${first.name} + một hương vị mang sắc thái ${em.icon} ${em.label}. Chọn đúng 2 hương vị ở bước 2.</div>
+        `;
+        sigGrid.appendChild(card);
+      });
 
       const albumGrid = document.getElementById("drink-album-grid");
       albumGrid.innerHTML = "";
@@ -5986,6 +6154,18 @@
       openModal("modal-keepsakes");
     }
 
+    function makeEndingReplayBtn(eid) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "mt-1.5 px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-200 text-[11px] font-semibold cursor-pointer";
+      b.textContent = "▶ Xem cutscene kết cục";
+      b.addEventListener("click", () => {
+        closeModal("modal-endings-gallery");
+        playCutscene(eid, () => openEndingsGalleryModal());
+      });
+      return b;
+    }
+
     function openEndingsGalleryModal() {
       const grid = document.getElementById("endings-gallery-grid");
       grid.innerHTML = "";
@@ -6014,6 +6194,7 @@
             </div>
             ${unlocked ? `<p class="text-[11px] text-stone-300 mt-1">${ed.summary}</p>` : ""}
           `;
+          if (unlocked) row.appendChild(makeEndingReplayBtn(eid));
           box.appendChild(row);
         });
         grid.appendChild(box);
@@ -6041,6 +6222,7 @@
             <div class="font-semibold ${unlocked ? "text-amber-200" : ""}">${lbl.icon} ${lbl.name}: ${unlocked ? ed.title : "🔒 Chưa mở khóa"}</div>
             ${unlocked ? `<p class="text-[11px] text-stone-300 mt-1">${ed.summary}</p>` : ""}
           `;
+          if (unlocked) row.appendChild(makeEndingReplayBtn(eid));
           box.appendChild(row);
         });
         grid.appendChild(box);
@@ -6207,7 +6389,18 @@
       document.getElementById("secrets-count").textContent = `${unlockedCount}`;
 
       SECRET_VAULT.forEach((s) => {
-        if (!isSecretUnlocked(s.id)) return;
+        if (!isSecretUnlocked(s.id)) {
+          const [cur, max] = getSecretProgress(s.id);
+          const lockedCard = document.createElement("div");
+          lockedCard.className = "p-3.5 rounded-2xl border text-xs space-y-1 bg-stone-950/80 border-stone-800";
+          lockedCard.innerHTML = `
+            <div class="font-bold text-sm text-stone-400">🔒 Bí mật chưa mở</div>
+            <p class="text-stone-300">💡 ${s.hint}</p>
+            ${s.hiddenProgress ? "" : `<div class="text-[11px] font-mono-code text-amber-300">Tiến độ: ${cur}/${max}</div>`}
+          `;
+          grid.appendChild(lockedCard);
+          return;
+        }
         const card = document.createElement("div");
         card.className = "p-3.5 rounded-2xl border text-xs space-y-2 bg-fuchsia-500/10 border-fuchsia-400/40";
         card.innerHTML = `
@@ -6226,9 +6419,15 @@
         card.appendChild(playBtn);
         grid.appendChild(card);
       });
-      if (unlockedCount === 0) {
-        grid.innerHTML = `<div class="text-xs text-stone-400">Chưa có bí mật nào được tìm thấy.</div>`;
-      }
+      const doneModes = SHIFT_MODES.filter((m) => persistentArchive.completedModes[m.id]).length;
+      const door = document.createElement("div");
+      door.className = "p-3.5 rounded-2xl border text-xs space-y-1 bg-rose-500/10 border-rose-400/35";
+      door.innerHTML = isTwistUnlocked()
+        ? `<div class="font-bold text-rose-200">🕊️ Cánh cửa cuối cùng đã mở</div><p class="text-stone-300">Hãy mở Menu và chọn «🕊️ Cánh Cửa Thứ Hai».</p>`
+        : `<div class="font-bold text-rose-200">🕊️ Còn một cánh cửa cuối cùng…</div>
+           <p class="text-stone-300">Nó chỉ mở khi bạn đã đi trọn cả ba chặng tháng trực (Tháng Mưa → Hội Ngộ → Khuya Khoắt), mở đủ 33 kết cục và mở hết mọi bí mật ở trên.</p>
+           <div class="text-[11px] font-mono-code text-amber-300">Chặng đã hoàn thành: ${doneModes}/3 • Kết cục: ${Math.min(33, Object.keys(persistentArchive.unlockedEndings).length)}/33 • Bí mật: ${unlockedCount}/${SECRET_VAULT.length}</div>`;
+      grid.appendChild(door);
       openModal("modal-secrets");
     }
 
@@ -6249,12 +6448,13 @@
       grid.innerHTML = "";
       EASTER_EGGS.forEach((egg) => {
         const unlocked = Boolean(persistentArchive.discoveredEasterEggs[egg.id]);
-        if (!unlocked) return;
         const el = document.createElement("div");
-        el.className = "p-3 rounded-2xl border text-xs bg-emerald-500/15 border-emerald-400/40";
+        el.className = unlocked
+          ? "p-3 rounded-2xl border text-xs bg-emerald-500/15 border-emerald-400/40"
+          : "p-3 rounded-2xl border text-xs bg-stone-950/80 border-stone-800";
         el.innerHTML = `
           <div class="font-bold ${unlocked ? "text-emerald-200" : "text-stone-300"}">${unlocked ? egg.icon : "❓"} ${egg.name}</div>
-          <div class="text-stone-400 mt-1">${unlocked ? `✅ Đã khám phá! Mảnh ghép: “${EGG_FRAGMENTS[egg.id]}”` : ""}</div>
+          <div class="text-stone-400 mt-1">${unlocked ? `✅ Đã khám phá! Mảnh ghép: “${EGG_FRAGMENTS[egg.id]}”` : `💡 ${egg.hint}`}</div>
         `;
         grid.appendChild(el);
       });
@@ -6653,6 +6853,13 @@
       });
 
       document.getElementById("btn-cs-player-continue").addEventListener("click", () => {
+        if (activeCutscenePages && activeCutscenePages.idx < activeCutscenePages.pages.length - 1) {
+          activeCutscenePages.idx++;
+          renderCutscenePage();
+          audioEngine.playChime(494, 0.25, 0.03);
+          return;
+        }
+        activeCutscenePages = null;
         closeModal("modal-cutscene-player");
         const cb = activeCutsceneCallback;
         activeCutsceneCallback = null;
